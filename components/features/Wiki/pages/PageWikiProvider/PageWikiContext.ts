@@ -24,4 +24,5 @@ export const PageWikiContext = createContext<IPageWikiContext>({
   updatePage: () => {},
   deletePage: () => {},
   updatePageContent: () => {},
+  params: [],
 });

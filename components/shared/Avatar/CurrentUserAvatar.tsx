@@ -23,16 +23,16 @@ export const CurrentUserAvatar: React.FC<CurrentUserAvatarProps> = (props) => {
 
   return (
     <Avatar
-      backgroundColor={getHSLFromString(user.email, 80, 30)}
+      backgroundColor={getHSLFromString(user.email ?? user.uid, 80, 30)}
       textColor={"#fff"}
     >
       {user.photoURL ? (
         <img
           src={user.photoURL}
-          alt={getInitialsFromDisplay(user.displayName)}
+          alt={getInitialsFromDisplay(user.displayName ?? "")}
         />
       ) : (
-        <>{getInitialsFromDisplay(user.displayName)}</>
+        <>{getInitialsFromDisplay(user.displayName ?? "")}</>
       )}
     </Avatar>
   );
