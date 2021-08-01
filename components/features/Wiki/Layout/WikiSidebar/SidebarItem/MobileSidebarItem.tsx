@@ -1,25 +1,12 @@
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { SidebarItemProps } from "./SidebarItem";
 import Link from "next/link";
 import { IconButton } from "components/shared/Button";
 import CollapseIcon from "@heroicons/react/solid/ChevronRightIcon";
 
-export interface SidebarItemProps {
-  name: string;
-  level?: number;
-  collapsed?: boolean;
-  hasCollapseContent?: boolean;
-  handleCollapse?: () => void;
-  IconSlot?: typeof CollapseIcon;
-  hoverAction?: {
-    onClick: () => void;
-    Icon: typeof CollapseIcon;
-  };
-  href?: string;
-}
-
-export const SidebarItem: React.FC<SidebarItemProps> = (props) => {
+export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
   const {
     name,
     href,
@@ -30,8 +17,6 @@ export const SidebarItem: React.FC<SidebarItemProps> = (props) => {
     hoverAction,
     IconSlot,
   } = props;
-
-  const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const router = useRouter();
   const isSelected = router.asPath === href;
@@ -54,15 +39,13 @@ export const SidebarItem: React.FC<SidebarItemProps> = (props) => {
   return (
     <div
       className={clsx(
-        "flex text-white",
+        "flex text-gray-700",
         href
-          ? "hover:bg-primary-800 rounded-lg"
-          : "border-b-2 border-primary-600 italic",
-        isSelected ? "bg-primary-800" : ""
+          ? "hover:bg-gray-200 rounded-lg"
+          : "border-b-2 border-gray-300 italic",
+        isSelected ? "bg-gray-300" : ""
       )}
       style={{ marginLeft: (level ?? 0) * 24 }}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
     >
       {showCollapsableArrowButton && (
         <IconButton
@@ -73,7 +56,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = (props) => {
         >
           <CollapseIcon
             className={clsx(
-              "w-4 h-4 rotate-0 text-primary-100",
+              "w-5 h-5 rotate-0 text-gray-500",
               collapsed ? "rotate-0" : "rotate-90"
             )}
           />
@@ -84,22 +67,20 @@ export const SidebarItem: React.FC<SidebarItemProps> = (props) => {
           className={clsx(
             href ? "cursor-pointer" : "",
             typeof collapsed === "boolean" ? "pr-2" : "px-2",
-            "flex items-center flex-grow py-0.5 whitespace-nowrap"
+            "flex items-center flex-grow py-0.5 whitespace-prewrap"
           )}
         >
           {showCollapsableNoContentDot && (
             <div className={"p-1 flex items-center justify-center"}>
               <svg
-                className={
-                  "w-4 h-4 text-primary-100 fill-current stroke-current"
-                }
+                className={"w-5 h-5 text-gray-500 fill-current stroke-current"}
               >
                 <circle cx={"50%"} cy={"50%"} r={2}></circle>
               </svg>
             </div>
           )}
           {IconSlot && (
-            <IconSlot className={clsx("text-primary-100 mr-4 w-5 h-5")} />
+            <IconSlot className={clsx("text-gray-500 mr-4 w-5 h-5")} />
           )}
           <span className={"py-2 text-sm font-normal tracking-tight"}>
             {name}
@@ -110,11 +91,10 @@ export const SidebarItem: React.FC<SidebarItemProps> = (props) => {
         <IconButton
           square
           id={"hover-action"}
-          className={isHovering ? "visible" : "invisible"}
           onClick={() => hoverAction.onClick()}
           small
         >
-          <HoverIcon className={"w-5 h-5 text-primary-100"} />
+          <HoverIcon className={"w-5 h-5 text-gray-500"} />
         </IconButton>
       )}
     </div>

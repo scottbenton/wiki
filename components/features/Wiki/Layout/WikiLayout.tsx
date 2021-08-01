@@ -1,10 +1,11 @@
-import { WikiSidebar } from "./WikiSidebar";
+import { MobileSidebar, DesktopSidebar } from "./WikiSidebar";
 import { WikiToolbar } from "./WikiToolbar";
 import { PageLayout, PageLayoutProps } from "components/layout/PageLayout";
 import React, { useEffect, useState } from "react";
 import { useIsMobile } from "hooks/useIsMobile";
 import { useBaseWikiInfo } from "../BaseWikiProvider";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 
 const pageLayoutConfig = {
   centered: "flex items-center justify-center",
@@ -24,6 +25,8 @@ export const WikiPage: React.FC<WikiPageProps> = (props) => {
   const { children, ToolbarItems, pageLayoutProps, layout = "column" } = props;
 
   const { info, pages } = useBaseWikiInfo();
+  const router = useRouter();
+  const path = router.asPath;
 
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(
@@ -31,8 +34,16 @@ export const WikiPage: React.FC<WikiPageProps> = (props) => {
   );
 
   useEffect(() => {
-    setSidebarOpen(isMobile ? false : true);
+    if (!isMobile) {
+      setSidebarOpen(true);
+    }
   }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [isMobile, path]);
 
   return (
     <PageLayout
@@ -49,8 +60,17 @@ export const WikiPage: React.FC<WikiPageProps> = (props) => {
     >
       {!(info.loading || pages.loading) && (
         <>
-          <WikiSidebar open={sidebarOpen} />
-          <div className={"flex-grow overflow-auto bg-white"}>
+          {isMobile ? (
+            <MobileSidebar open={sidebarOpen} />
+          ) : (
+            <DesktopSidebar open={sidebarOpen} />
+          )}
+          <div
+            className={clsx(
+              "flex-grow bg-white",
+              isMobile && sidebarOpen ? "overflow-hidden" : "overflow-auto"
+            )}
+          >
             <div className={"w-full bg-white p-4 md:px-8"}>
               <article className={clsx(pageLayoutConfig[layout])}>
                 {children}

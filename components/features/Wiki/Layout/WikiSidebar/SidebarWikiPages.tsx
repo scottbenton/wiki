@@ -16,11 +16,11 @@ export const SidebarWikiPages: React.FC<SidebarWikiPagesProps> = (props) => {
     return null;
   } else {
     return (
-      <>
+      <div className={"mt-1"}>
         {wiki.rootPages.map((pageId, index) => (
           <SidebarWikiPage pageId={pageId} key={index} />
         ))}
-      </>
+      </div>
     );
   }
 };
