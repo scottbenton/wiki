@@ -19,9 +19,9 @@ export const Header: React.FC = (props) => {
       <nav className="flex items-center justify-between px-4 md:px-8">
         <div className="flex items-baseline">
           <Link href="/">
-            <span className="text-2xl text-primary-700 font-branding font-black mr-8">
+            <a className="text-2xl text-primary-700 font-branding font-black mr-8 underlined-link">
               willo
-            </span>
+            </a>
           </Link>
           <NavLink href={"/wikis"}>Your Wikis</NavLink>
         </div>

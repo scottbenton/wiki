@@ -66,7 +66,7 @@ export const WikiForm: React.FC<WikiFormProps> = (props) => {
         value={wiki.description ?? ""}
         onChange={(evt) => updateDescription(evt.currentTarget.value)}
       />
-      <div className={"space-children flex justify-end"}>
+      <div className={"flex justify-end space-x-2"}>
         <Button
           id={editing ? "update-wiki" : "create-wiki"}
           type={"submit"}
