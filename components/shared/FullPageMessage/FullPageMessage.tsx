@@ -35,7 +35,7 @@ export const FullPageMessage: React.FC<FullPageMessageProps> = (props) => {
           {message}
         </p>
       )}
-      {actions && <div className={"space-children mt-4"}>{actions}</div>}
+      {actions && <div className={"mt-4 space-x-2"}>{actions}</div>}
     </section>
   );
 };

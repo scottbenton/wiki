@@ -151,7 +151,11 @@ html {
 }
 
 @layer utilities {
-  .space-children > {
-    @apply m-0.5;
+  .underlined-link {
+    @apply cursor-pointer;
+  }
+  .underlined-link:hover,
+  .underlined-link:focus {
+    @apply underline;
   }
 }
