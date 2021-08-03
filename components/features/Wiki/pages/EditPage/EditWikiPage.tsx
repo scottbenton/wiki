@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { wikiPageConfig } from "../../WikiPageConfig";
-import { usePageWiki } from "../PageWikiProvider";
+import { useWikiPage } from "../../WikiPageProvider";
 import { EditWikiForm } from "./EditWikiForm";
 
 export const EditWikiPage: React.FC = (props) => {
@@ -12,7 +12,7 @@ export const EditWikiPage: React.FC = (props) => {
     currentPageId,
     updatePage,
     updatePageContent,
-  } = usePageWiki();
+  } = useWikiPage();
 
   const router = useRouter();
 

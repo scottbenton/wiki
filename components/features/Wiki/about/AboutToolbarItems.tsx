@@ -1,10 +1,10 @@
 import React from "react";
-import { useBaseWikiInfo } from "../BaseWikiProvider";
+import { useWikiPage } from "../WikiPageProvider";
 import { wikiPageConfig } from "../WikiPageConfig";
 import { Button } from "components/shared/Button";
 
 export const AboutToolbarItems: React.FC = (props) => {
-  const { wikiId } = useBaseWikiInfo();
+  const { wikiId } = useWikiPage();
   return (
     <Button
       id={"edit-about"}

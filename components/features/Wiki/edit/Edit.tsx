@@ -2,11 +2,11 @@ import { WikiForm } from "components/features/WikiList/WikiForm";
 import { Wiki } from "domain/Wiki";
 import { useRouter } from "next/router";
 import React from "react";
-import { useBaseWikiInfo } from "../BaseWikiProvider";
+import { useWikiPage } from "../WikiPageProvider";
 import { wikiPageConfig } from "../WikiPageConfig";
 
 export const Edit: React.FC = (props) => {
-  const { wikiId, info, updateWiki } = useBaseWikiInfo();
+  const { wikiId, info, updateWiki } = useWikiPage();
   const router = useRouter();
 
   const handleSubmit = (wiki: Wiki) => {
