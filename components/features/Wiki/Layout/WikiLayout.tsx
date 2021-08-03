@@ -3,7 +3,7 @@ import { WikiToolbar } from "./WikiToolbar";
 import { PageLayout, PageLayoutProps } from "components/layout/PageLayout";
 import React, { useEffect, useState } from "react";
 import { useIsMobile } from "hooks/useIsMobile";
-import { useBaseWikiInfo } from "../BaseWikiProvider";
+import { useWikiPage } from "../WikiPageProvider";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 
@@ -24,7 +24,7 @@ export interface WikiPageProps {
 export const WikiPage: React.FC<WikiPageProps> = (props) => {
   const { children, ToolbarItems, pageLayoutProps, layout = "column" } = props;
 
-  const { info, pages } = useBaseWikiInfo();
+  const { info, pages } = useWikiPage();
   const router = useRouter();
   const path = router.asPath;
 

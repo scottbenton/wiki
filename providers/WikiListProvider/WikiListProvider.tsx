@@ -44,8 +44,8 @@ export const WikiListProvider: React.FC = (props) => {
     firestore().collection(WikiCollectionName).add(wiki);
   };
 
-  const updateWiki = (id: string, wiki: Wiki) => {
-    firestore().collection(WikiCollectionName).doc(id).set(wiki);
+  const updateWiki = async (id: string, wiki: Wiki) => {
+    await firestore().collection(WikiCollectionName).doc(id).set(wiki);
   };
 
   return (

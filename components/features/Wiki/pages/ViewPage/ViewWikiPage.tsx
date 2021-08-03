@@ -1,9 +1,9 @@
 import React from "react";
-import { usePageWiki } from "../PageWikiProvider";
+import { useWikiPage } from "../../WikiPageProvider";
 import { RichTextInput } from "components/shared/RichTextInput";
 
 export const ViewWikiPage: React.FC = (props) => {
-  const { currentPage, currentPageContent } = usePageWiki();
+  const { currentPage, currentPageContent } = useWikiPage();
 
   if (!currentPage) return null;
 

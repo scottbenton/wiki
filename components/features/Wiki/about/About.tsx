@@ -1,8 +1,8 @@
 import React from "react";
-import { useBaseWikiInfo } from "../BaseWikiProvider";
+import { useWikiPage } from "../WikiPageProvider";
 
 export const About: React.FC = () => {
-  const { info } = useBaseWikiInfo();
+  const { info } = useWikiPage();
 
   if (!info.data) return null;
 

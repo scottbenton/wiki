@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { IconButton } from "components/shared/Button";
 import { MenuIcon } from "@heroicons/react/outline";
-import { useBaseWikiInfo } from "../BaseWikiProvider";
+import { useWikiPage } from "../WikiPageProvider";
 import { wikiPageConfig } from "../WikiPageConfig";
 
 export interface WikiToolbarProps {
@@ -12,7 +12,7 @@ export interface WikiToolbarProps {
 
 export const WikiToolbar: React.FC<WikiToolbarProps> = (props) => {
   const { toggleSidebar, ToolbarItems } = props;
-  const { wikiId, info } = useBaseWikiInfo();
+  const { wikiId, info } = useWikiPage();
 
   return (
     <div className={"justify-between flex items-center py-2"}>

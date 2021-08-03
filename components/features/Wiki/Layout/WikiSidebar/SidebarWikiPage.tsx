@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SidebarItem } from "./SidebarItem";
 import AddPageIcon from "@heroicons/react/solid/DocumentAddIcon";
-import { useBaseWikiInfo } from "../../BaseWikiProvider";
+import { useWikiPage } from "../../WikiPageProvider";
 import { wikiPageConfig } from "../../WikiPageConfig";
 export interface SidebarWikiPageProps {
   pageId: string;
@@ -11,9 +11,7 @@ export interface SidebarWikiPageProps {
 export const SidebarWikiPage: React.FC<SidebarWikiPageProps> = (props) => {
   const { pageId, depth } = props;
 
-  const { wikiId } = useBaseWikiInfo();
-
-  const { pages: pageList, createPage } = useBaseWikiInfo();
+  const { wikiId, pages: pageList, createPage } = useWikiPage();
   const { data: pages } = pageList;
 
   const [collapsed, setCollapsed] = useState<boolean>(true);

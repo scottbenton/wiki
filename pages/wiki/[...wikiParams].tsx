@@ -1,7 +1,7 @@
 import { wikiPageConfig } from "components/features/Wiki/WikiPageConfig";
 import { useRouter } from "next/router";
 import React from "react";
-import { BaseWikiProvider } from "components/features/Wiki/BaseWikiProvider";
+import { WikiPageProvider } from "components/features/Wiki/WikiPageProvider";
 import { WikiPage } from "components/features/Wiki/Layout";
 
 const WikiBasePage: React.FC = (props) => {
@@ -11,17 +11,13 @@ const WikiBasePage: React.FC = (props) => {
     router.asPath.match(config.matchRegex)
   );
   if (page) {
-    const { Component, Wrapper, ToolbarItems, layout } = page;
-    const PageWrapper: React.FC = (props) =>
-      Wrapper ? <Wrapper>{props.children}</Wrapper> : <>{props.children}</>;
+    const { Component, ToolbarItems, layout } = page;
     return (
-      <BaseWikiProvider>
+      <WikiPageProvider>
         <WikiPage ToolbarItems={ToolbarItems} layout={layout}>
-          <PageWrapper>
-            <Component />
-          </PageWrapper>
+          <Component />
         </WikiPage>
-      </BaseWikiProvider>
+      </WikiPageProvider>
     );
   }
   return <>Wiki</>;
