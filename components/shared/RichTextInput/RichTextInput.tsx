@@ -6,6 +6,8 @@ import Image from "@tiptap/extension-image";
 import { Editor } from "./Editor";
 import { Toolbar } from "./Toolbar";
 import clsx from "clsx";
+import { useWikiMention } from "./WikiMention/useWikiMention";
+
 export interface RichTextInputProps {
   value: string;
   onChange?: (value: string) => void;
@@ -16,12 +18,13 @@ export const RichTextInput: React.FC<RichTextInputProps> = (props) => {
 
   const readOnly = onChange ? false : true;
 
+  const WikiMentions = useWikiMention();
+
   const editor = useEditor({
-    extensions: [StarterKit, Link, Image],
+    extensions: [StarterKit, Link, Image, WikiMentions],
     content: value,
     editable: !readOnly,
     onUpdate: ({ editor }) => {
-      console.debug("Change occurs");
       onChange && onChange(editor.getHTML());
     },
     editorProps: {

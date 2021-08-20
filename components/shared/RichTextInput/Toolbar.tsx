@@ -14,7 +14,7 @@ import {
   NumberListIcon,
   BulletListIcon,
   LinkIcon,
-  TableIcon,
+  ArticleIcon,
   PhotoIcon,
 } from "../Icons";
 import { ToolbarGroup } from "./ToolbarGroup";
@@ -105,6 +105,13 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
         >
           <PhotoIcon />
         </ToolbarButtonInput>
+        {/* <ToolbarButtonInput
+          // onEntry={(id) => editor.chain().focus().toggleWikiLink({ href: id, wikiId: wiki })}
+          onEntry={() => { }}
+          placeholderText={"Insert page id here"}
+        >
+          <ArticleIcon />
+        </ToolbarButtonInput> */}
       </ToolbarGroup>
       <ToolbarGroup endItem>
         <ToolbarButton onClick={() => editor.chain().focus().undo().run()}>
