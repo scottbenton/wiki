@@ -12,6 +12,7 @@ export interface IWikiPageContext {
   currentPage?: WikiPage;
   currentPageId?: string;
   currentPageContent: DataState<WikiPageContent>;
+  parentPageList: string[];
 
   updateWiki: (id: string, wiki: Wiki) => void;
   deleteWiki: (id: string) => void;
@@ -27,6 +28,8 @@ export const WikiPageContext = createContext<IWikiPageContext>({
   info: { loading: true },
   pages: { loading: true },
   currentPageContent: { loading: false },
+
+  parentPageList: [],
 
   updateWiki: () => {},
   deleteWiki: () => {},

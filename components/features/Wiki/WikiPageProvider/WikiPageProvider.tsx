@@ -34,6 +34,25 @@ export const WikiPageProvider: React.FC = (props) => {
     Array.isArray(wikiParams) && wikiParams.length > 1 ? wikiParams[2] : "";
   const page = wikiPages.data && wikiPages.data[pageId];
 
+  const [parentPageList, setParentPageList] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (pageId && wikiPages.data) {
+      let list = [];
+
+      let currentNode = wikiPages.data[pageId].parentPage;
+
+      while (currentNode) {
+        list.push(currentNode);
+        currentNode = wikiPages.data[currentNode].parentPage;
+      }
+
+      setParentPageList(list);
+    } else {
+      setParentPageList([]);
+    }
+  }, [pageId, wikiPages]);
+
   const [pageContentState, setPageContentState] = useState<
     DataState<WikiPageContent>
   >({ loading: true });
@@ -251,6 +270,7 @@ export const WikiPageProvider: React.FC = (props) => {
         currentPage: page,
         currentPageId: pageId,
         currentPageContent: pageContentState,
+        parentPageList,
 
         updateWiki,
         deleteWiki,

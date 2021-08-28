@@ -1,7 +1,7 @@
 import { Button } from "components/shared/Button";
-import { InputLabel, TextInput } from "components/shared/TextInput";
+import { InputLabel } from "components/shared/TextInput";
 import React, { useState } from "react";
-import { RichTextInput } from "components/shared/RichTextInput";
+import { WikiRichTextInput } from "../WikiRichTextInput";
 
 export interface EditWikiFormProps {
   currentTitle: string;
@@ -34,7 +34,7 @@ export const EditWikiForm: React.FC<EditWikiFormProps> = (props) => {
           onChange={(evt) => setTitle(evt.target.value)}
         />
       </label>
-      <RichTextInput value={content} onChange={(val) => setContent(val)} />
+      <WikiRichTextInput value={content} onChange={(val) => setContent(val)} />
       <div className={"flex justify-end space-x-1"}>
         <Button id="cancel" href={cancelHref}>
           Cancel
