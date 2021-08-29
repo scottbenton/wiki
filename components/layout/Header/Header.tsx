@@ -16,14 +16,14 @@ export const Header: React.FC = (props) => {
 
   return (
     <div className={"bg-white shadow-lg z-50"}>
-      <nav className="flex items-center justify-between px-4 md:px-8">
-        <div className="flex items-baseline">
+      <nav className="px-4 md:px-8 h-14 flex items-center">
+        <div className="flex-grow h-full flex items-center">
           <Link href="/">
             <a className="text-2xl text-primary-700 font-branding font-black mr-8 underlined-link">
               willo
             </a>
           </Link>
-          <NavLink href={"/wikis"}>Your Wikis</NavLink>
+          {user && <NavLink href={"/wikis"}>Your Wikis</NavLink>}
         </div>
         {user ? (
           <AvatarMenu />
