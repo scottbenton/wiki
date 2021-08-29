@@ -35,20 +35,18 @@ export const RichTextInput: React.FC<RichTextInputProps> = (props) => {
   });
 
   if (readOnly) {
-    return <Editor editor={editor} />;
+    return <Editor editor={editor} readOnly />;
   }
   return (
     <div
       className={clsx(
-        "border relative rounded-lg overflow-hidden",
+        "border relative rounded-lg",
         editor?.isFocused ? "border-gray-500" : ""
       )}
     >
       <div className={"flex flex-col w-full"}>
         <Toolbar editor={editor} />
-        <div className={"p-4"}>
-          <Editor editor={editor} />
-        </div>
+        <Editor editor={editor} readOnly={false} />
       </div>
     </div>
   );

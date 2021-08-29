@@ -18,7 +18,7 @@ export const ToolbarButtonInput: React.FC<ToolbarButtonInputProps> = (
   const [inputValue, setInputValue] = useState<string>("");
 
   return (
-    <Popover as={"div"} className={"relative inline-block"}>
+    <Popover as={"div"} className={"relative z-50 inline-block"}>
       <div>
         <Popover.Button
           className={clsx(
@@ -60,7 +60,8 @@ export const ToolbarButtonInput: React.FC<ToolbarButtonInputProps> = (
             className={
               "p-2 focus:ring-2 ring-smoke-lighter focus:outline-none hover:bg-gray-600"
             }
-            onClick={() => {
+            onClick={(evt) => {
+              evt.preventDefault();
               onEntry(inputValue);
             }}
           >

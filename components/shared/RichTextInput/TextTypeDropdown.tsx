@@ -63,7 +63,7 @@ export const TextTypeDropdown: React.FC<TextTypeDropdownProps> = (props) => {
   };
 
   return (
-    <Popover as={"div"} className={"relative inline-block"}>
+    <Popover as={"div"} className={"relative inline-block z-50"}>
       <div>
         <Popover.Button
           className={
@@ -76,13 +76,13 @@ export const TextTypeDropdown: React.FC<TextTypeDropdownProps> = (props) => {
       </div>
       <Popover.Panel
         className={
-          "absolute z-20 flex flex-col overflow-hidden w-full rounded-b-lg shadow-lg focus:outline-none bg-gray-900 text-white text-sm py-1"
+          "absolute z-50 flex flex-col overflow-hidden w-full rounded-b-lg shadow-lg focus:outline-none bg-gray-900 text-white text-sm py-1"
         }
       >
         {Object.keys(textLabels).map((key, index) => (
           <button
             className={clsx(
-              "py-1 px-4 hover:bg-green-700 font-semibold text-left"
+              "py-1 px-4 hover:bg-gray-700 font-semibold text-left"
             )}
             onClick={(evt) => setActiveTextType(evt, key as TEXT_TYPES)}
             key={index}
