@@ -83,10 +83,12 @@ export const WikiPage: React.FC<WikiPageProps> = (props) => {
         ),
       }}
       toolbarItems={
-        <WikiToolbar
-          toggleSidebar={() => setSidebarOpen((open) => !open)}
-          ToolbarItems={ToolbarItems}
-        />
+        !(info.error || pages.error || interpageError) && (
+          <WikiToolbar
+            toggleSidebar={() => setSidebarOpen((open) => !open)}
+            ToolbarItems={ToolbarItems}
+          />
+        )
       }
       pageType={"row"}
       {...pageLayoutProps}

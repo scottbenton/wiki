@@ -82,7 +82,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
       data-testid={descriptiveId}
       {...buttonProps}
     >
-      {loading && <Spinner />}
+      {loading && <Spinner className={"mr-2"} diameter={16} />}
       {children}
     </Element>
   );
