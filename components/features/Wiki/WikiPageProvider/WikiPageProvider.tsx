@@ -37,7 +37,7 @@ export const WikiPageProvider: React.FC = (props) => {
   const [parentPageList, setParentPageList] = useState<string[]>([]);
 
   useEffect(() => {
-    if (pageId && wikiPages.data) {
+    if (pageId && wikiPages.data && wikiPages.data[pageId]) {
       let list = [];
 
       let currentNode = wikiPages.data[pageId].parentPage;
