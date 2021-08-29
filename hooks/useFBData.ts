@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { DataState } from "domain/DataState";
 
 enum ACTIONS {
   LOAD_DATA,
@@ -25,12 +26,6 @@ type actions<DataType> =
   | ILoadDataAction<DataType>
   | ISetErrorAction
   | ISetLoadingAction;
-
-export interface DataState<DataType> {
-  data?: DataType;
-  loading: boolean;
-  error?: string;
-}
 
 function createReducer<DataType>() {
   return (state: DataState<DataType>, action: actions<DataType>) => {

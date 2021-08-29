@@ -1,7 +1,7 @@
 import { Wiki } from "domain/Wiki";
 import { WikiPage } from "domain/WikiPage";
 import { WikiPageContent } from "domain/WikiPageContent";
-import { DataState } from "hooks/useFBData";
+import { DataState } from "domain/DataState";
 import { createContext } from "react";
 
 export interface IWikiPageContext {

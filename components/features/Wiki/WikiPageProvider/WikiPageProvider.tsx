@@ -4,7 +4,7 @@ import {
   WikiPageContent,
   WikiPageContentSubCollectionName,
 } from "domain/WikiPageContent";
-import { DataState } from "hooks/useFBData";
+import { DataState } from "domain/DataState";
 import { firestore } from "lib/firebase";
 import { useRouter } from "next/router";
 import { useAuth } from "providers/AuthProvider";
