@@ -31,11 +31,11 @@ export const FullPageMessage: React.FC<FullPageMessageProps> = (props) => {
         {title}
       </h2>
       {message && (
-        <p className={clsx(messageClassName, "mt-2 text-gray-700 text-lg")}>
+        <p className={clsx(messageClassName, "mt-4 text-gray-600")}>
           {message}
         </p>
       )}
-      {actions && <div className={"mt-4 space-x-2"}>{actions}</div>}
+      {actions && <div className={"mt-6 space-x-2 flex"}>{actions}</div>}
     </section>
   );
 };
