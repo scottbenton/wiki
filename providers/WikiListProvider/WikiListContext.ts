@@ -1,5 +1,5 @@
 import { Wiki } from "domain/Wiki";
-import { DataState } from "hooks/useFBData";
+import { DataState } from "domain/DataState";
 import { createContext } from "react";
 
 export interface WikiMap {
