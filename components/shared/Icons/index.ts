@@ -15,3 +15,4 @@ export * from "./RedoIcon";
 export * from "./TableIcon";
 export * from "./LinkIcon";
 export * from "./PhotoIcon";
+export * from "./ArticleIcon";

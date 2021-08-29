@@ -150,6 +150,12 @@ html {
   }
 }
 
+@layer components {
+  .prose .wiki-link {
+    @apply bg-primary-200 rounded-md p-0.5 cursor-pointer no-underline;
+  }
+}
+
 @layer utilities {
   .underlined-link {
     @apply cursor-pointer;

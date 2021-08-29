@@ -1,27 +1,29 @@
 import React from "react";
 import { useEditor } from "@tiptap/react";
+import { Extensions } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import { Editor } from "./Editor";
 import { Toolbar } from "./Toolbar";
 import clsx from "clsx";
+
 export interface RichTextInputProps {
   value: string;
   onChange?: (value: string) => void;
+  extensions?: Extensions;
 }
 
 export const RichTextInput: React.FC<RichTextInputProps> = (props) => {
-  const { value, onChange } = props;
+  const { value, onChange, extensions = [] } = props;
 
   const readOnly = onChange ? false : true;
 
   const editor = useEditor({
-    extensions: [StarterKit, Link, Image],
+    extensions: [StarterKit, Link, Image, ...extensions],
     content: value,
     editable: !readOnly,
     onUpdate: ({ editor }) => {
-      console.debug("Change occurs");
       onChange && onChange(editor.getHTML());
     },
     editorProps: {
@@ -43,7 +45,7 @@ export const RichTextInput: React.FC<RichTextInputProps> = (props) => {
       )}
     >
       <div className={"flex flex-col w-full"}>
-        {!readOnly && <Toolbar editor={editor} />}
+        <Toolbar editor={editor} />
         <div className={"p-4"}>
           <Editor editor={editor} />
         </div>

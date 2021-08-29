@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SidebarItem } from "./SidebarItem";
 import AddPageIcon from "@heroicons/react/solid/DocumentAddIcon";
 import { useWikiPage } from "../../WikiPageProvider";
@@ -11,10 +11,16 @@ export interface SidebarWikiPageProps {
 export const SidebarWikiPage: React.FC<SidebarWikiPageProps> = (props) => {
   const { pageId, depth } = props;
 
-  const { wikiId, pages: pageList, createPage } = useWikiPage();
+  const { wikiId, pages: pageList, createPage, parentPageList } = useWikiPage();
   const { data: pages } = pageList;
 
   const [collapsed, setCollapsed] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (pageId && parentPageList.includes(pageId)) {
+      setCollapsed(false);
+    }
+  }, [parentPageList, pageId]);
 
   if (!pages || !pages[pageId]) {
     return null;
