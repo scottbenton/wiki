@@ -51,15 +51,19 @@ export const WikiList = React.forwardRef<WikiListRef, WikiListProps>(
     }));
 
     return (
-      <div className={"bg-white shadow-lg py-2 rounded-md border"}>
+      <div
+        className={
+          "flex flex-col overflow-hidden w-full rounded-b-lg shadow-lg focus:outline-none bg-gray-900 text-white text-sm py-1"
+        }
+      >
         {items.map(
           (pageId, index) =>
             pageDict[pageId] && (
               <button
                 key={index}
                 className={clsx(
-                  "btn rounded-none normal-case font-normal font-body w-full justify-start",
-                  selectedIndex === index ? "bg-gray-100 " : ""
+                  "py-1 px-4 hover:bg-gray-700 font-semibold text-left",
+                  selectedIndex === index ? "bg-gray-700 " : ""
                 )}
                 onClick={() => handleSelection(index)}
               >

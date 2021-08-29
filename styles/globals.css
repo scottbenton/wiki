@@ -152,7 +152,13 @@ html {
 
 @layer components {
   .prose .wiki-link {
-    @apply bg-primary-200 rounded-md p-0.5 cursor-pointer no-underline;
+    @apply rounded-md p-0.5 cursor-pointer no-underline;
+  }
+  .prose .wiki-link-normal {
+    @apply bg-primary-200 text-primary-900;
+  }
+  .prose .wiki-link-error {
+    @apply bg-error-200 text-error-900 line-through cursor-auto;
   }
 }
 

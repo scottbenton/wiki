@@ -31,7 +31,9 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
 
   return (
     <div
-      className={"flex flex-wrap border-b bg-gray-100 w-full sticky top-0 z-10"}
+      className={
+        "flex flex-wrap border-b bg-gray-100 w-full sticky top-0 z-10 rounded-t-lg"
+      }
     >
       <ToolbarGroup>
         <ToolbarButton

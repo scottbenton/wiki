@@ -242,6 +242,9 @@ export const WikiPageProvider: React.FC = (props) => {
   };
 
   const updatePageContent = (pageId: string, content: string) => {
+    setPageContentState({
+      loading: true,
+    });
     firestore()
       .collection(WikiCollectionName)
       .doc(wikiId)

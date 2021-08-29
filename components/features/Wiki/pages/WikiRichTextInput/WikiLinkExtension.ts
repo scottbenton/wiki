@@ -10,6 +10,7 @@ import { PluginKey, Plugin } from "prosemirror-state";
 import Suggestion from "@tiptap/suggestion";
 import { useRouter } from "next/router";
 import { wikiPageConfig } from "components/features/Wiki/WikiPageConfig";
+import clsx from "clsx";
 
 export const WikiLinkPluginKey = new PluginKey("wiki-link");
 
@@ -22,7 +23,7 @@ export function useWikiLinkExtensionScratch() {
   const char = "#";
 
   const renderLabel = (node: ProseMirrorNode<any>) => {
-    return char + " " + (pageDict[node.attrs.id]?.title ?? "Wiki Not Found");
+    return char + " " + (pageDict[node.attrs.id]?.title ?? "Page Not Found");
   };
 
   return Node.create({
@@ -71,7 +72,10 @@ export function useWikiLinkExtensionScratch() {
         mergeAttributes(
           { "data-wiki-link": "" },
           {
-            class: "wiki-link",
+            class: clsx(
+              "wiki-link",
+              pageDict[node.attrs.id] ? "wiki-link-normal" : "wiki-link-error"
+            ),
             // href: wikiPageConfig.viewPage.constructPath(
             //   wikiId,
             //   node.attrs.id
@@ -204,7 +208,7 @@ export function useWikiLinkExtensionScratch() {
             handleClick: (view, pos, event) => {
               const attributes = (event.target as any)?.attributes;
               const pageId = attributes?.getNamedItem("data-id")?.value;
-              if (pageId) {
+              if (pageId && pageDict[pageId]) {
                 if (view.editable) {
                   // Push new tab
                   window.open(
