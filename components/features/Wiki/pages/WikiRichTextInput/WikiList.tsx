@@ -25,15 +25,12 @@ export const WikiList = React.forwardRef<WikiListRef, WikiListProps>(
     const handleSelection = (index?: number) => {
       const item = items[index ?? selectedIndex];
 
-      console.debug((index ?? selectedIndex) + ":", item);
       if (item) {
         command({ id: item });
       }
     };
 
     const handleKeyDown = (evt: KeyboardEvent) => {
-      evt.preventDefault();
-      console.debug(evt.key);
       if (evt.key === "ArrowUp") {
         handleSelectionMove(-1);
         return true;
@@ -61,10 +58,8 @@ export const WikiList = React.forwardRef<WikiListRef, WikiListProps>(
               <button
                 key={index}
                 className={clsx(
-                  "btn rounded-none",
-                  selectedIndex === index
-                    ? "bg-gray-100 normal-case font-normal font-body"
-                    : ""
+                  "btn rounded-none normal-case font-normal font-body w-full justify-start",
+                  selectedIndex === index ? "bg-gray-100 " : ""
                 )}
                 onClick={() => handleSelection(index)}
               >

@@ -151,7 +151,7 @@ html {
 }
 
 @layer components {
-  .wiki-link {
+  .prose .wiki-link {
     @apply bg-primary-200 rounded-md p-0.5 cursor-pointer no-underline;
   }
 }
