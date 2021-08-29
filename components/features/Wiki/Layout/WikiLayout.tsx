@@ -6,6 +6,9 @@ import { useIsMobile } from "hooks/useIsMobile";
 import { useWikiPage } from "../WikiPageProvider";
 import clsx from "clsx";
 import { useRouter } from "next/router";
+import { Button } from "components/shared/Button";
+import { wikiPageConfig } from "../WikiPageConfig";
+import { useAuth } from "providers/AuthProvider";
 
 const pageLayoutConfig = {
   centered: "flex items-center justify-center",
@@ -24,7 +27,8 @@ export interface WikiPageProps {
 export const WikiPage: React.FC<WikiPageProps> = (props) => {
   const { children, ToolbarItems, pageLayoutProps, layout = "column" } = props;
 
-  const { info, pages } = useWikiPage();
+  const { info, pages, currentPageId, wikiId } = useWikiPage();
+  const { user } = useAuth();
   const router = useRouter();
   const path = router.asPath;
 
@@ -45,10 +49,39 @@ export const WikiPage: React.FC<WikiPageProps> = (props) => {
     }
   }, [isMobile, path]);
 
+  let interpageError = undefined;
+  if (pages.data && currentPageId && !pages.data[currentPageId]) {
+    interpageError = "Wiki page no longer exists";
+  }
+
   return (
     <PageLayout
       loading={info.loading || pages.loading}
-      errorMessage={info.error || pages.error}
+      errorMessage={info.error || pages.error || interpageError}
+      errorMessageProps={{
+        actions: (
+          <>
+            <Button
+              id={"wiki-list"}
+              href={user ? "/wikis" : "/"}
+              color={"primary"}
+              variant={"outlined"}
+            >
+              Home
+            </Button>
+            {interpageError && (
+              <Button
+                id={"wiki-root"}
+                href={wikiPageConfig.about.constructPath(wikiId)}
+                color={"primary"}
+                variant={"contained"}
+              >
+                Return to Wiki Root
+              </Button>
+            )}
+          </>
+        ),
+      }}
       toolbarItems={
         <WikiToolbar
           toggleSidebar={() => setSidebarOpen((open) => !open)}

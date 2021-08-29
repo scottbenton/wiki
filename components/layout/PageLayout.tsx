@@ -1,5 +1,9 @@
 import clsx from "clsx";
-import { FullPageMessage } from "components/shared/FullPageMessage";
+import { Card } from "components/shared/Card";
+import {
+  FullPageMessage,
+  FullPageMessageProps,
+} from "components/shared/FullPageMessage";
 import { useRouter } from "next/router";
 import { useLoadingFeedback } from "providers/FeedbackProvider";
 import React from "react";
@@ -18,6 +22,7 @@ export interface PageLayoutProps {
   className?: string;
   loading?: boolean;
   errorMessage?: string;
+  errorMessageProps?: Partial<FullPageMessageProps>;
 }
 
 export const PageLayout: React.FC<PageLayoutProps> = (props) => {
@@ -29,6 +34,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props) => {
     loading,
     errorMessage,
     className,
+    errorMessageProps,
   } = props;
 
   const router = useRouter();
@@ -48,10 +54,13 @@ export const PageLayout: React.FC<PageLayoutProps> = (props) => {
         )}
       >
         {errorMessage ? (
-          <FullPageMessage
-            title={"Error Loading Page"}
-            message={errorMessage}
-          />
+          <Card className={"p-6"}>
+            <FullPageMessage
+              title={"Error Loading Page"}
+              message={errorMessage}
+              {...errorMessageProps}
+            />
+          </Card>
         ) : (
           children
         )}
