@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "providers/AuthProvider";
 import { Button } from "components/shared/Button";
@@ -7,9 +7,13 @@ import { NavLink } from "./NavLink";
 import { useFeedback } from "providers/FeedbackProvider";
 import clsx from "clsx";
 import { Transition } from "@headlessui/react";
+import Image from "next/image";
+import { useIsMobile } from "hooks/useIsMobile";
 
 export const Header: React.FC = (props) => {
   const { children } = props;
+
+  const isMobile = useIsMobile();
 
   const { user, loading: authLoading, signInWithGoogle } = useAuth();
   const { loading: pageLoading } = useFeedback();
@@ -19,8 +23,26 @@ export const Header: React.FC = (props) => {
       <nav className="px-4 md:px-8 h-14 flex items-center">
         <div className="flex-grow h-full flex items-center">
           <Link href="/">
-            <a className="text-2xl text-primary-700 font-branding font-black mr-8 underlined-link">
-              willo
+            <a
+              className={
+                "flex items-center mr-10 focus:bg-primary-200 focus:outline-none hover:bg-primary-200 p-1 rounded-md"
+              }
+            >
+              {isMobile ? (
+                <Image
+                  src={"/branding/logo/WilloLogo128.png"}
+                  alt="willo"
+                  width={35}
+                  height={40}
+                />
+              ) : (
+                <Image
+                  src={"/branding/wordmark/WilloWordmark128.png"}
+                  alt="willo"
+                  width={78}
+                  height={40}
+                />
+              )}
             </a>
           </Link>
           {user && <NavLink href={"/wikis"}>Your Wikis</NavLink>}

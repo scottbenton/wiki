@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="260" version="1.1" viewBox="0 0 135.47 68.792" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="clipPath33">
+   <path d="m0 807h712v-807h-712z"/>
+  </clipPath>
+  <clipPath id="clipPath41">
+   <path d="m163.75 548.25h384.5v-384.5h-384.5z"/>
+  </clipPath>
+  <clipPath id="clipPath45">
+   <path d="m163.75 548.25h384.5v-384.5h-384.5z"/>
+  </clipPath>
+  <mask id="mask47" x="0" y="0" width="1" height="1" maskUnits="userSpaceOnUse">
+   <g clip-path="url(#clipPath41)">
+    <path d="m163.75 548.25h384.5v-384.5h-384.5z"/>
+    <g clip-path="url(#clipPath45)">
+     <path d="m99.917 612.08h512.67v-512.67h-512.67z" fill="#fff"/>
+    </g>
+   </g>
+  </mask>
+  <clipPath id="clipPath71">
+   <path d="m163.75 548.25h384.5v-384.5h-384.5z"/>
+  </clipPath>
+  <clipPath id="clipPath75">
+   <path d="m164 548h384v-384h-384z"/>
+  </clipPath>
+  <clipPath id="clipPath79">
+   <path d="m164.07 547.97h383.93v-384.01h-383.93z"/>
+  </clipPath>
+  <clipPath id="clipPath83">
+   <path d="m164.02 547.93h383.82v-383.75h-383.82z"/>
+  </clipPath>
+  <clipPath id="clipPath87">
+   <path d="m299.75 548.25h0.5v-384.5h-0.5z"/>
+  </clipPath>
+  <clipPath id="clipPath91">
+   <path d="m355.75 548.25h0.5v-384.5h-0.5z"/>
+  </clipPath>
+  <clipPath id="clipPath95">
+   <path d="m411.83 548.25h0.5v-384.5h-0.5z"/>
+  </clipPath>
+  <clipPath id="clipPath99">
+   <path d="m163.9 412.1h383.93v-0.2h-383.93z"/>
+  </clipPath>
+  <clipPath id="clipPath103">
+   <path d="m163.9 356.1h383.93v-0.2h-383.93z"/>
+  </clipPath>
+  <clipPath id="clipPath107">
+   <path d="m163.75 300.25h384.23v-0.5h-384.23z"/>
+  </clipPath>
+ </defs>
+ <g transform="matrix(.35278 0 0 -.35278 -24.416 185.33)">
+  <text transform="matrix(1,0,0,-1,100,699)" fill="#000000" font-family="'Roboto Mono'" font-size="8px"><tspan x="0 4.8000002 9.6000004 14.4 19.200001 24 28.799999 33.599998 38.400002 43.200001 48 52.799999 57.599998 62.400002 67.199997 72 76.800003" y="0">512 px Asset Size</tspan><tspan x="0 4.8000002 9.6000004 14.4 19.200001 24 28.799999 33.599998 38.400002 43.200001 48 52.799999 57.599998 62.400002 67.199997 72 76.800003 81.599998 86.400002 91.199997 96 100.8 105.6 110.4 115.2 120 124.8 129.60001 134.39999 139.2 144 148.8 153.60001 158.39999 163.2 168" y="12">384 px Keyline Grid (75% asset size)</tspan></text>
+  <g transform="matrix(.75 0 0 .75 116.56 166.54)">
+   <g transform="translate(692.26 69.296)">
+    <path d="m100 612h512v-512h-512z" fill="#fff"/>
+    <g clip-path="url(#clipPath33)">
+     <g mask="url(#mask47)">
+      <g clip-path="url(#clipPath71)">
+       <g clip-path="url(#clipPath75)" opacity=".10001">
+        <path d="m164 548h384v-384h-384z" fill="#66ddb7"/>
+       </g>
+       <path d="m164 548h384v-384h-384z" fill="none" stroke="#65dcb7" stroke-width=".5"/>
+       <g transform="translate(183 484)">
+        <path d="m0 0h345.99c1.659 0 3.004-1.345 3.004-3.004v-249.99c0-1.659-1.345-3.004-3.004-3.004h-345.99c-1.659 0-3.004 1.345-3.004 3.004v249.99c0 1.659 1.345 3.004 3.004 3.004z" fill="none" stroke="#65dcb7" stroke-width=".5"/>
+       </g>
+       <g transform="translate(231 532)">
+        <path d="m0 0h249.99c1.659 0 3.004-1.345 3.004-3.004v-345.99c0-1.659-1.345-3.004-3.004-3.004h-249.99c-1.659 0-3.004 1.345-3.004 3.004v345.99c0 1.659 1.345 3.004 3.004 3.004z" fill="none" stroke="#65dcb7" stroke-width=".5"/>
+       </g>
+       <g transform="translate(207 508)">
+        <path d="m0 0h297.99c1.659 0 3.004-1.345 3.004-3.004v-297.99c0-1.659-1.345-3.004-3.004-3.004h-297.99c-1.659 0-3.004 1.345-3.004 3.004v297.99c0 1.659 1.345 3.004 3.004 3.004z" fill="none" stroke="#65dcb7" stroke-width=".5"/>
+       </g>
+       <g transform="translate(356,532)">
+        <path d="m0 0c97.202 0 176-78.798 176-176s-78.798-176-176-176-176 78.798-176 176 78.798 176 176 176z" fill="none" stroke="#65dcb7" stroke-width=".5"/>
+       </g>
+       <g transform="translate(356,436)">
+        <path d="m0 0c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" fill="none" stroke="#65dcb7" stroke-width=".5"/>
+       </g>
+       <g clip-path="url(#clipPath79)" opacity=".3">
+        <g transform="translate(164.42 164.31)">
+         <path d="m0 0 383.23 383.3" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".5"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath83)" opacity=".3">
+        <g transform="translate(547.48 164.53)">
+         <path d="m0 0-383.11 383.05" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".5"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath87)" opacity=".3">
+        <g transform="translate(300,548)">
+         <path d="m0 0v-384" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".5"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath91)" opacity=".3">
+        <g transform="translate(356,548)">
+         <path d="m0 0v-384" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".5"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath95)" opacity=".3">
+        <g transform="translate(412.08 548)">
+         <path d="m0 0v-384" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".5"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath99)" opacity=".3">
+        <g transform="translate(547.73 412)">
+         <path d="m0 0h-383.73" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".2"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath103)" opacity=".3">
+        <g transform="translate(547.73 356)">
+         <path d="m0 0h-383.73" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".2"/>
+        </g>
+       </g>
+       <g clip-path="url(#clipPath107)" opacity=".3">
+        <g transform="translate(547.73 300)">
+         <path d="m0 0h-383.73" fill="none" stroke="#65dcb7" stroke-linecap="square" stroke-width=".5"/>
+        </g>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g transform="matrix(1.337 0 0 1.337 -20.237 -186.9)">
+   <path d="m88.282 392.85s56.047-9.1759 83.762 39.528c27.714 48.704 6.456 100.32 6.456 100.32-64.396-8.5314-89.407-39.204-97.736-49.399-13.896-15.244-17.649-56.492-9.8828-74.561 6.2813-14.614 17.401-15.885 17.401-15.885" fill="#059669"/>
+   <path d="m141.49 482.31s-44.26-45.697-53.207-89.459" fill="none" stroke="#047857" stroke-linecap="round" stroke-width="12"/>
+  </g>
+  <text transform="scale(1,-1)" x="83.773079" y="-374.37653" font-family="'Palatino Linotype'" font-size="148.31px" stroke-width=".99314" style="line-height:1.25" xml:space="preserve"><tspan x="83.773079" y="-374.37653" fill="#059669" font-family="Nunito" font-size="148.31px" font-weight="800" stroke-width=".99314"><tspan fill="#ffffff" stroke-width=".99314">w<tspan font-size="18.538px" stroke-width=".99314">    </tspan></tspan>illo</tspan></text>
+  <text transform="scale(1,-1)" x="222.5623" y="-427.84192" font-family="Magneto" font-size="39.726px" stroke-width=".99314" style="line-height:1.25" xml:space="preserve"><tspan x="222.5623" y="-427.84192" stroke-width=".99314">   </tspan></text>
+  <text transform="matrix(.75 0 0 -.75 69.21 525.34)" font-family="Magneto" font-size="40px" style="line-height:1.25;shape-inside:url(#rect78960);white-space:pre" xml:space="preserve"/>
+ </g>
+</svg>
