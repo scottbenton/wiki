@@ -5,10 +5,14 @@ const Home: React.FC = (props) => {
   return (
     <PageLayout>
       <Head>
-        <title>Wiki App</title>
+        <title>Willo</title>
         <link rel="icon" href="/favicon.ico" sizes={"any"} />
         <link rel="icon" href="/icon.svg" type={"image/svg+xml"} />
-        <link rel="apple-touch-icon" href={"/apple-touch-icon.png"} />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-touch-icon.png"
+          sizes="180x180"
+        />
         <link rel="manifest" href={"/manifest.webmanifest"} />
         <meta name="author" content="Scott Benton" />
       </Head>
