@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" version="1.1" viewBox="0 0 135.47 135.47" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(.35278 0 0 -.35278 -24.416 185.33)">
+  <g transform="translate(2.1766)">
+   <g transform="translate(32.648)">
+    <g transform="matrix(2.6329 0 0 2.6329 -106.93 -877.22)">
+     <path d="m88.282 392.85s56.047-9.1759 83.762 39.528c27.714 48.704 6.456 100.32 6.456 100.32-64.396-8.5314-89.407-39.204-97.736-49.399-13.896-15.244-17.649-56.492-9.8828-74.561 6.2813-14.614 17.401-15.885 17.401-15.885" fill="#059669"/>
+     <path d="m141.49 482.31s-44.26-45.697-53.207-89.459" fill="none" stroke="#047857" stroke-linecap="round" stroke-width="12"/>
+    </g>
+    <text transform="scale(1,-1)" x="118.01147" y="-261.7883" font-family="'Palatino Linotype'" font-size="292.05px" stroke-width="1.9557" style="line-height:1.25" xml:space="preserve"><tspan x="118.01147" y="-261.7883" fill="#059669" font-family="Nunito" font-size="292.05px" font-weight="800" stroke-width="1.9557"><tspan fill="#ffffff" stroke-width="1.9557">w</tspan></tspan></text>
+    <text transform="scale(1,-1)" x="222.56224" y="-427.84152" font-family="Magneto" font-size="39.725px" stroke-width=".99314" style="line-height:1.25" xml:space="preserve"><tspan x="222.56224" y="-427.84152" stroke-width=".99314">   </tspan></text>
+   </g>
+  </g>
+  <text transform="matrix(.75 0 0 -.75 69.21 525.34)" font-family="Magneto" font-size="40px" style="line-height:1.25;shape-inside:url(#rect78960);white-space:pre" xml:space="preserve"/>
+ </g>
+</svg>
