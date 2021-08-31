@@ -1,10 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { useAuth } from "providers/AuthProvider";
-import { Button } from "components/shared/Button";
+import { LoginButton } from "../Auth/LoginButton";
 
 export const HeroSection: React.FC = () => {
-  const { user, signInWithGoogle } = useAuth();
   return (
     <section className={"grid grid-cols-1 sm:grid-cols-2 mt-0 sm:mt-12"}>
       <div
@@ -28,16 +26,9 @@ export const HeroSection: React.FC = () => {
         >
           Organize your Thoughts, Ideas, and Notes
         </h2>
-        <Button
-          variant={"contained"}
-          color={"primary"}
-          className={"inline-flex mt-8 text-lg"}
-          id={"cta"}
-          href={user ? "/wikis" : undefined}
-          onClick={user ? undefined : () => signInWithGoogle()}
-        >
-          {user ? "Go to your Wikis" : "Login / Create Account"}
-        </Button>
+        <div className={"mt-10"}>
+          <LoginButton large />
+        </div>
       </div>
       <div className={"py-8 max-w-md mx-auto mt-8 sm:mt-0"}>
         <div

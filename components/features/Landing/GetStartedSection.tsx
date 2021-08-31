@@ -1,9 +1,7 @@
-import { Button } from "components/shared/Button";
-import { useAuth } from "providers/AuthProvider";
 import React from "react";
+import { LoginButton } from "../Auth/LoginButton";
 
 export const GetStartedSection: React.FC = (props) => {
-  const { user, signInWithGoogle } = useAuth();
   return (
     <section
       className={
@@ -11,15 +9,7 @@ export const GetStartedSection: React.FC = (props) => {
       }
     >
       <p className={"text-2xl font-semibold"}>Interested? Get started!</p>
-      <Button
-        id="cta"
-        variant={"contained"}
-        color={"default"}
-        href={user ? "/wikis" : undefined}
-        onClick={user ? undefined : () => signInWithGoogle()}
-      >
-        {user ? "Go to your Wikis" : "Login / Create Account"}
-      </Button>
+      <LoginButton large color={"default"} />
     </section>
   );
 };
