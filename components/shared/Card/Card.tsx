@@ -37,13 +37,7 @@ export const Card: React.FC<CardProps> = (props) => {
 
   const MyCard = () => (
     <Element
-      className={clsx(
-        "bg-white text-gray-900 shadow-md rounded-lg",
-        topBorder && "border-t-4 border-primary-500",
-        (handleClick || href) &&
-          "text-left transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:ring-2 ring-offset-smoke-default",
-        className
-      )}
+      className={clsx("card", topBorder && "top-border", className)}
       tabIndex={tabIndex}
       onClick={onClick}
       data-testid={testId}
