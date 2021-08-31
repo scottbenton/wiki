@@ -1,23 +1,16 @@
-import Head from "next/head";
-import { Card } from "components/shared/Card";
 import { PageLayout } from "components/layout/PageLayout";
+import { HeroSection } from "components/features/Landing/HeroSection";
+import { FeatureSection } from "components/features/Landing/FeatureSection";
+import { GetStartedSection } from "components/features/Landing/GetStartedSection";
+
 const Home: React.FC = (props) => {
   return (
-    <PageLayout>
-      <Head>
-        <title>Willo</title>
-        <link rel="icon" href="/favicon.ico" sizes={"any"} />
-        <link rel="icon" href="/icon.svg" type={"image/svg+xml"} />
-        <link
-          rel="apple-touch-icon"
-          href="/apple-touch-icon.png"
-          sizes="180x180"
-        />
-        <link rel="manifest" href={"/manifest.webmanifest"} />
-        <meta name="author" content="Scott Benton" />
-      </Head>
-      <h1 className="text-red-500">Test Application</h1>
-      <Card className="flex p-4">Test Card</Card>
+    <PageLayout className={"bg-white w-full"}>
+      <div className={"p-4 md:p-8 mx-auto max-w-screen-lg w-full"}>
+        <HeroSection />
+        <FeatureSection />
+        <GetStartedSection />
+      </div>
     </PageLayout>
   );
 };

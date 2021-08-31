@@ -30,7 +30,7 @@ export const Header: React.FC = (props) => {
             >
               {isMobile ? (
                 <Image
-                  src={"/branding/logo/WilloLogo128.png"}
+                  src={"/branding/logo/WilloLogoW128.png"}
                   alt="willo"
                   width={33}
                   height={40}

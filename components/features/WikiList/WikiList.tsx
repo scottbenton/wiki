@@ -42,12 +42,15 @@ export const WikiList: React.FC<WikiListProps> = (props) => {
       <FullPageMessage
         className={"mt-16"}
         title={"No Wikis Found"}
-        titleClassName={"text-white"}
         message={"Create a new wiki to get started."}
-        messageClassName={"text-primary-200"}
         actions={
           <>
-            <Button variant={"contained"} id={"add-wiki-fpm"} color={"default"}>
+            <Button
+              variant={"contained"}
+              id={"add-wiki-fpm"}
+              color={"primary"}
+              href={"/wikis/create"}
+            >
               Create a new Wiki
             </Button>
           </>
