@@ -9,7 +9,11 @@ export const GetStartedSection: React.FC = (props) => {
       }
     >
       <p className={"text-2xl font-semibold"}>Interested? Get started!</p>
-      <LoginButton large color={"default"} />
+      <LoginButton
+        large
+        color={"default"}
+        className={"bg-white hover:bg-primary-200"}
+      />
     </section>
   );
 };

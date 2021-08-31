@@ -2,6 +2,7 @@ import { PageLayout } from "components/layout/PageLayout";
 import { HeroSection } from "components/features/Landing/HeroSection";
 import { FeatureSection } from "components/features/Landing/FeatureSection";
 import { GetStartedSection } from "components/features/Landing/GetStartedSection";
+import "@fontsource/nunito/900.css";
 
 const Home: React.FC = (props) => {
   return (

@@ -18,12 +18,12 @@ export const WikiCard: React.FC<WikiCardProps> = (props) => {
   return (
     <Card
       href={wikiPageConfig.about.constructPath(wikiId)}
-      className={"overflow-hidden bg-gray-300 w-full h-full cursor-pointer"}
+      className={"overflow-hidden w-full h-full cursor-pointer"}
     >
       <section className={"flex h-full w-full"}>
         <div
           className={
-            "flex flex-col align-start flex-grow overflow-hidden pl-4 py-4 h-full bg-white rounded-lg"
+            "flex flex-col align-start flex-grow overflow-hidden pl-4 py-4 h-full"
           }
         >
           <div className={"flex items-center"}>
@@ -34,9 +34,7 @@ export const WikiCard: React.FC<WikiCardProps> = (props) => {
             {description}
           </p>
         </div>
-        <div
-          className={"text-gray-700 flex-shrink-0 h-full flex items-center p-2"}
-        >
+        <div className={"flex-shrink-0 flex items-center p-2 text-gray-600"}>
           <ArrowCircleRightIcon width={24} />
         </div>
       </section>

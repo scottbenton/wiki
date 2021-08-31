@@ -8,13 +8,13 @@ interface LoginButtonProps extends Partial<ButtonProps> {
 }
 
 export const LoginButton: React.FC<LoginButtonProps> = (props) => {
-  const { large, ...buttonProps } = props;
+  const { large, className, ...buttonProps } = props;
   const { user, signInWithGoogle, loading } = useAuth();
   return (
     <Button
       variant={"contained"}
       color={"primary"}
-      className={clsx("inline-flex", large ? "text-lg" : "")}
+      className={clsx("inline-flex", large ? "text-lg" : "", className)}
       id={"cta"}
       href={user ? "/wikis" : undefined}
       onClick={user ? undefined : () => signInWithGoogle()}

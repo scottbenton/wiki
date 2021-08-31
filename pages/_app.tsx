@@ -3,8 +3,7 @@ import React from "react";
 import "styles/globals.css";
 import { initializeApp } from "lib/firebase";
 import { AppProviders } from "providers";
-import "typeface-inter";
-import "typeface-nunito";
+import "@fontsource/inter/variable.css";
 
 initializeApp();
 

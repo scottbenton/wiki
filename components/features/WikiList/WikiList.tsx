@@ -24,7 +24,7 @@ export const WikiList: React.FC<WikiListProps> = (props) => {
           "flex flex-grow items-center justify-center content-center w-full"
         }
       >
-        <Spinner diameter={82} className={"text-white"} />
+        <Spinner diameter={82} className={"text-primary-600"} />
       </div>
     );
   } else if (error) {
@@ -61,7 +61,7 @@ export const WikiList: React.FC<WikiListProps> = (props) => {
     return (
       <div
         className={
-          "grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-4 lg:py-8"
+          "grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-4 lg:py-8"
         }
       >
         {Object.keys(data).map((wikiId) => (

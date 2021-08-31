@@ -1,6 +1,7 @@
 import React from "react";
 import {
   DocumentTextIcon,
+  DocumentDuplicateIcon,
   FolderOpenIcon,
   PencilIcon,
 } from "@heroicons/react/outline";
@@ -20,30 +21,40 @@ export const FeatureSection: React.FC = (props) => {
       >
         Features
       </h3>
+
       <Feature
-        title={"Categorize your Notes"}
+        title={"Stay Organized with Wikis"}
         description={
-          "Stay focused by categorizing your notes, ideas, and projects into different wikis"
+          "Each wiki is like a folder for your ideas. Group your pages of notes into separate wikis, keeping you focused on the task at hand."
         }
         imageSrc={"/images/WikiListScreenshot.png"}
         Icon={FolderOpenIcon}
       />
       <Feature
-        title={"Infinite Pages"}
+        title={"Put your Thoughts on Pages"}
         description={
-          "Create any number of pages or subpages to follow up on your ideas, or group them together"
+          "Type out your ideas, and then come back and view, edit, or delete them whenever you like, on whatever device you like. All of your notes are securely stored in the cloud."
         }
-        imageSrc={"/images/WikiSidebarScreenshot.png"}
+        imageSrc={"/images/WikiPageScreenshot.png"}
         Icon={DocumentTextIcon}
         flipSide
       />
       <Feature
+        title={"Page Hierarchy"}
+        description={
+          "Any page in your wiki can have any number of pages organized under them. Follow up on a thought or idea, or organize your notes further."
+        }
+        imageSrc={"/images/WikiSidebarScreenshot.png"}
+        Icon={DocumentDuplicateIcon}
+      />
+      <Feature
         title={"Format your Content"}
         description={
-          "Keep your notes looking good with extensive formatting options"
+          "Keep your notes consistent and easy on the eyes with our formatting options."
         }
-        imageSrc={"/images/WikiPageScreenshot.png"}
+        imageSrc={"/images/WikiEditScreenshot.png"}
         Icon={PencilIcon}
+        flipSide
       />
     </section>
   );

@@ -21,7 +21,7 @@ export const Feature: React.FC<FeatureProps> = (props) => {
         className={clsx("", flipSide ? "sm:col-start-2 sm:row-start-1" : "")}
       >
         <div className={"flex items-center"}>
-          <div className={"rounded-lg bg-green-600 text-white p-2"}>
+          <div className={"rounded-full bg-green-600 text-white p-2"}>
             <Icon className={"w-6 h-6"} />
           </div>
           <h4 className={"text-2xl ml-2 tracking-tight"}>{title}</h4>
