@@ -1,29 +1,30 @@
-# Next.js + Tailwind CSS Example
+![Willo Wiki Logo](/public/branding/wordmark/WilloWordmark256.png)
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) (v2.1) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## Environments
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+| Environment | URL                                        | Branch |
+| ----------- | ------------------------------------------ | ------ |
+| Prod        | [willo.wiki](https://willo.wiki)           | prod   |
+| Beta        | [beta.willo.wiki](https://beta.willo.wiki) | beta   |
 
-## Preview
+## Features
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+![Mockup of a Wiki Page](/public/images/WikiPageMockup.png)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Willo wiki is a note tacking application that stores your notes (called pages), in a tree structure. It features the ability to store multiple wiki projects in the cloud, so you can access and edit them anywhere. Pages can be edited with a rich text editor, allowing for content to look exactly how you want it to.
 
-## Deploy your own
+## Development
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+1. Clone the project
+2. Install dependencies: `npm i`
+3. Set up a firebase project with authentication and a firestore database.
+4. Move the following information from the firebase project into your environment variables. For local development, I recommend creating a `.env.local` file in the root of this application, setting the following variables in.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+```
+--- .env.local ---
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=PROJECT_ID_HERE
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=AUTH_DOMAIN_HERE
+NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY=API_KEY_HERE
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+5. Run `npm run dev` to start up the application
