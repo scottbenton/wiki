@@ -4,12 +4,15 @@ import { auth, googleAuthProvider, User, firestore } from "lib/firebase";
 import { User as DBUser, UserCollectionName } from "domain/User";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export const AuthProvider: React.FC = (props) => {
   const { children } = props;
 
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged((state) => {
@@ -48,6 +51,9 @@ export const AuthProvider: React.FC = (props) => {
     const provider = googleAuthProvider();
     auth()
       .signInWithPopup(provider)
+      .then(() => {
+        router.push("/wikis");
+      })
       .catch((e) => {
         console.error("Error signing in:", e);
       })
