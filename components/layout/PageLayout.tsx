@@ -50,7 +50,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props) => {
           constrained
             ? "mx-auto max-w-screen-xl px-4 py-4 lg:px-8 lg:py-8 w-full"
             : "",
-          "overflow-auto relative"
+          "overflow-auto relative flex-grow"
         )}
       >
         {errorMessage ? (

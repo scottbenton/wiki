@@ -24,7 +24,7 @@ export const WikiList: React.FC<WikiListProps> = (props) => {
           "flex flex-grow items-center justify-center content-center w-full"
         }
       >
-        <Spinner diameter={82} className={"text-white"} />
+        <Spinner diameter={82} className={"text-primary-600"} />
       </div>
     );
   } else if (error) {
@@ -42,12 +42,15 @@ export const WikiList: React.FC<WikiListProps> = (props) => {
       <FullPageMessage
         className={"mt-16"}
         title={"No Wikis Found"}
-        titleClassName={"text-white"}
         message={"Create a new wiki to get started."}
-        messageClassName={"text-primary-200"}
         actions={
           <>
-            <Button variant={"contained"} id={"add-wiki-fpm"} color={"default"}>
+            <Button
+              variant={"contained"}
+              id={"add-wiki-fpm"}
+              color={"primary"}
+              href={"/wikis/create"}
+            >
               Create a new Wiki
             </Button>
           </>
@@ -58,7 +61,7 @@ export const WikiList: React.FC<WikiListProps> = (props) => {
     return (
       <div
         className={
-          "grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-4 lg:py-8"
+          "grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-4 lg:py-8"
         }
       >
         {Object.keys(data).map((wikiId) => (

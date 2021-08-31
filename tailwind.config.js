@@ -26,7 +26,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        branding: ["quicksand", "sans-serif"],
+        branding: ["nunito", "sans-serif"],
         body: ["Inter", "Arial", "sans-serif"],
       },
       colors: {

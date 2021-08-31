@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="512" height="512" version="1.1" viewBox="0 0 135.47 135.47" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="512" version="1.1" viewBox="0 0 111.12 135.47" xmlns="http://www.w3.org/2000/svg">
  <defs>
   <clipPath id="clipPath33">
    <path d="m0 807h712v-807h-712z"/>
@@ -50,6 +50,7 @@
   </clipPath>
  </defs>
  <g transform="matrix(.35278 0 0 -.35278 -24.416 185.33)">
+  <text transform="matrix(1,0,0,-1,100,699)" fill="#000000" font-family="'Roboto Mono'" font-size="8px"><tspan x="0 4.8000002 9.6000004 14.4 19.200001 24 28.799999 33.599998 38.400002 43.200001 48 52.799999 57.599998 62.400002 67.199997 72 76.800003" y="0">512 px Asset Size</tspan><tspan x="0 4.8000002 9.6000004 14.4 19.200001 24 28.799999 33.599998 38.400002 43.200001 48 52.799999 57.599998 62.400002 67.199997 72 76.800003 81.599998 86.400002 91.199997 96 100.8 105.6 110.4 115.2 120 124.8 129.60001 134.39999 139.2 144 148.8 153.60001 158.39999 163.2 168" y="12">384 px Keyline Grid (75% asset size)</tspan></text>
   <g transform="matrix(.75 0 0 .75 116.56 166.54)">
    <g transform="translate(692.26 69.296)">
     <path d="m100 612h512v-512h-512z" fill="#fff"/>
@@ -120,15 +121,11 @@
     </g>
    </g>
   </g>
-  <g transform="translate(2.1766)">
-   <g transform="translate(32.648)">
-    <g transform="matrix(2.6329 0 0 2.6329 -106.93 -877.22)">
-     <path d="m88.282 392.85s56.047-9.1759 83.762 39.528c27.714 48.704 6.456 100.32 6.456 100.32-64.396-8.5314-89.407-39.204-97.736-49.399-13.896-15.244-17.649-56.492-9.8828-74.561 6.2813-14.614 17.401-15.885 17.401-15.885" fill="#059669"/>
-     <path d="m141.49 482.31s-44.26-45.697-53.207-89.459" fill="none" stroke="#047857" stroke-linecap="round" stroke-width="12"/>
-    </g>
-    <text transform="scale(1,-1)" x="222.56224" y="-427.84152" font-family="Magneto" font-size="39.725px" stroke-width=".99314" style="line-height:1.25" xml:space="preserve"><tspan x="222.56224" y="-427.84152" stroke-width=".99314">   </tspan></text>
-   </g>
+  <g transform="matrix(2.6329 0 0 2.6329 -106.93 -877.22)">
+   <path d="m88.282 392.85s56.047-9.1759 83.762 39.528c27.714 48.704 6.456 100.32 6.456 100.32-64.396-8.5314-89.407-39.204-97.736-49.399-13.896-15.244-17.649-56.492-9.8828-74.561 6.2813-14.614 17.401-15.885 17.401-15.885" fill="#059669"/>
+   <path d="m141.49 482.31s-44.26-45.697-53.207-89.459" fill="none" stroke="#047857" stroke-linecap="round" stroke-width="12"/>
   </g>
+  <text transform="scale(1,-1)" x="222.5623" y="-427.84192" font-family="Magneto" font-size="39.726px" stroke-width=".99314" style="line-height:1.25" xml:space="preserve"><tspan x="222.5623" y="-427.84192" stroke-width=".99314">   </tspan></text>
   <text transform="matrix(.75 0 0 -.75 69.21 525.34)" font-family="Magneto" font-size="40px" style="line-height:1.25;shape-inside:url(#rect78960);white-space:pre" xml:space="preserve"/>
  </g>
 </svg>

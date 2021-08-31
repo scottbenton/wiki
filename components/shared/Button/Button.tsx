@@ -63,7 +63,24 @@ export const Button: React.FC<ButtonProps> = (props) => {
 
   const descriptiveId = id + "-button";
 
-  const Element = href ? "a" : "button";
+  const Element = href ? "span" : "button";
+
+  const combinedProps = {
+    className: clsx(
+      "btn",
+      variantMap[variant],
+      classMap[color][variant],
+      className
+    ),
+    onClick: (evt: React.MouseEvent<HTMLElement>) => {
+      evt.currentTarget.blur();
+      onClick && onClick(evt);
+    },
+    disabled: disabled || loading,
+    id: descriptiveId,
+    "data-testid": descriptiveId,
+    ...buttonProps,
+  };
 
   const MyButton = () => (
     <Element
@@ -81,21 +98,24 @@ export const Button: React.FC<ButtonProps> = (props) => {
       id={descriptiveId}
       data-testid={descriptiveId}
       {...buttonProps}
-    >
-      {loading && <Spinner className={"mr-2"} diameter={16} />}
-      {children}
-    </Element>
+    ></Element>
   );
 
   if (href) {
     return (
       <Link href={href}>
-        <div>
-          <MyButton />
-        </div>
+        <a {...combinedProps}>
+          {loading && <Spinner className={"mr-2"} diameter={16} />}
+          {children}
+        </a>
       </Link>
     );
   } else {
-    return <MyButton />;
+    return (
+      <button {...combinedProps}>
+        {loading && <Spinner className={"mr-2"} diameter={16} />}
+        {children}
+      </button>
+    );
   }
 };

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "providers/AuthProvider";
-import { Button } from "components/shared/Button";
 import { AvatarMenu } from "./AvatarMenu";
 import { NavLink } from "./NavLink";
 import { useFeedback } from "providers/FeedbackProvider";
@@ -9,13 +8,14 @@ import clsx from "clsx";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useIsMobile } from "hooks/useIsMobile";
+import { LoginButton } from "components/features/Auth/LoginButton";
 
 export const Header: React.FC = (props) => {
   const { children } = props;
 
   const isMobile = useIsMobile();
 
-  const { user, loading: authLoading, signInWithGoogle } = useAuth();
+  const { user } = useAuth();
   const { loading: pageLoading } = useFeedback();
 
   return (
@@ -30,7 +30,7 @@ export const Header: React.FC = (props) => {
             >
               {isMobile ? (
                 <Image
-                  src={"/branding/logo/WilloLogo128.png"}
+                  src={"/branding/logo/WilloLogoW128.png"}
                   alt="willo"
                   width={33}
                   height={40}
@@ -47,19 +47,7 @@ export const Header: React.FC = (props) => {
           </Link>
           {user && <NavLink href={"/wikis"}>Your Wikis</NavLink>}
         </div>
-        {user ? (
-          <AvatarMenu />
-        ) : (
-          <Button
-            id="sign-in"
-            variant="contained"
-            color="primary"
-            onClick={() => signInWithGoogle()}
-            loading={authLoading}
-          >
-            Sign In
-          </Button>
-        )}
+        {user ? <AvatarMenu /> : <LoginButton />}
       </nav>
       {children && (
         <>
