@@ -19,6 +19,7 @@ export const WikiToolbar: React.FC<WikiToolbarProps> = (props) => {
       <div className={"flex items-center"}>
         {toggleSidebar && (
           <IconButton
+            title={"Toggle Sidebar View"}
             className={"mr-2 text-gray-500 rounded-md"}
             id={"toggle-sidebar"}
             onClick={() => toggleSidebar()}

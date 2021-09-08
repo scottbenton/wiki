@@ -29,7 +29,12 @@ export const Dialog: React.FC<DialogProps> = (props) => {
               <HDialog.Title className={"font-semibold text-xl"}>
                 {title}
               </HDialog.Title>
-              <IconButton id={"close"} onClick={handleClose} square>
+              <IconButton
+                id={"close"}
+                onClick={handleClose}
+                square
+                title={"Close Dialog"}
+              >
                 <CloseIcon className={"w-5 h-5"} />
               </IconButton>
             </div>

@@ -53,6 +53,7 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
           onClick={() => handleCollapse && handleCollapse()}
           square
           small
+          title={collapsed ? "Expand Sub-Pages" : "Collapse Sub-Pages"}
         >
           <CollapseIcon
             className={clsx(
@@ -93,6 +94,7 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
           id={"hover-action"}
           onClick={() => hoverAction.onClick()}
           small
+          title={"Add Sub-Page"}
         >
           <HoverIcon className={"w-5 h-5 text-gray-500"} />
         </IconButton>
