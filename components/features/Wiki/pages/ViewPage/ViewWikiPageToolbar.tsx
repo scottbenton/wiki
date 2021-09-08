@@ -39,6 +39,7 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
         id={"delete-page"}
         square
         onClick={() => setConfirmDeleteDialogOpen(true)}
+        title={"Delete Current Page"}
       >
         <DeleteIcon className={"w-5 h-5"} />
       </IconButton>

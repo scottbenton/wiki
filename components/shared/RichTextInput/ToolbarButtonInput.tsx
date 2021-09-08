@@ -2,17 +2,19 @@ import clsx from "clsx";
 import React, { useRef, useState } from "react";
 import { Popover } from "@headlessui/react";
 import { CheckIcon, XIcon } from "@heroicons/react/solid";
+import { Tooltip } from "../Tooltip";
 
 export interface ToolbarButtonInputProps {
   onEntry: (entry: string) => void;
   className?: string;
   placeholderText: string;
+  title: string;
 }
 
 export const ToolbarButtonInput: React.FC<ToolbarButtonInputProps> = (
   props
 ) => {
-  const { children, className, onEntry, placeholderText } = props;
+  const { children, className, onEntry, placeholderText, title } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
@@ -20,14 +22,16 @@ export const ToolbarButtonInput: React.FC<ToolbarButtonInputProps> = (
   return (
     <Popover as={"div"} className={"relative z-50 inline-block"}>
       <div>
-        <Popover.Button
-          className={clsx(
-            className,
-            "btn px-2 hover:bg-gray-200 rounded-none text-gray-700"
-          )}
-        >
-          {children}
-        </Popover.Button>
+        <Tooltip content={title}>
+          <Popover.Button
+            className={clsx(
+              className,
+              "btn px-2 hover:bg-gray-200 rounded-none text-gray-700"
+            )}
+          >
+            {children}
+          </Popover.Button>
+        </Tooltip>
       </div>
       <Popover.Panel
         focus

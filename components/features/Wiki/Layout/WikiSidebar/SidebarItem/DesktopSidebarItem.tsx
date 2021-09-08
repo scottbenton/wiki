@@ -57,6 +57,7 @@ export const DesktopSidebarItem: React.FC<SidebarItemProps> = (props) => {
           onClick={() => handleCollapse && handleCollapse()}
           square
           small
+          title={collapsed ? "Expand Sub-Pages" : "Collapse Sub-Pages"}
         >
           <CollapseIcon
             className={clsx(
@@ -98,6 +99,7 @@ export const DesktopSidebarItem: React.FC<SidebarItemProps> = (props) => {
           className={isHovering ? "visible" : "invisible"}
           onClick={() => hoverAction.onClick()}
           small
+          title={"Create Sub-Page"}
         >
           <HoverIcon className={"w-5 h-5 text-gray-500"} />
         </IconButton>

@@ -14,7 +14,6 @@ import {
   NumberListIcon,
   BulletListIcon,
   LinkIcon,
-  ArticleIcon,
   PhotoIcon,
 } from "../Icons";
 import { ToolbarGroup } from "./ToolbarGroup";
@@ -39,35 +38,41 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive("bold")}
+          title={"Bold"}
         >
           <BoldIcon />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleItalic().run()}
           isActive={editor.isActive("italic")}
+          title={"Italics"}
         >
           <ItalicIcon />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleStrike().run()}
           isActive={editor.isActive("strike")}
+          title={"Strike-Through"}
         >
           <StrikeThroughIcon />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           isActive={editor.isActive("codeBlock")}
+          title={"Code Block"}
         >
           <CodeIcon />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           isActive={editor.isActive("blockquote")}
+          title={"Block Quote"}
         >
           <QuoteIcon />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
+          title={"Horizontal Rule"}
         >
           <HorizontalRuleIcon />
         </ToolbarButton>
@@ -79,12 +84,14 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           isActive={editor.isActive("bulletList")}
+          title={"Bullet List"}
         >
           <BulletListIcon />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           isActive={editor.isActive("orderedList")}
+          title={"Ordered List"}
         >
           <NumberListIcon />
         </ToolbarButton>
@@ -98,28 +105,29 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
               .run()
           }
           placeholderText={"Link"}
+          title={"Add a Link"}
         >
           <LinkIcon />
         </ToolbarButtonInput>
         <ToolbarButtonInput
           onEntry={(url) => editor.chain().focus().setImage({ src: url }).run()}
           placeholderText={"Link to Image"}
+          title={"Add an Image"}
         >
           <PhotoIcon />
         </ToolbarButtonInput>
-        {/* <ToolbarButtonInput
-          // onEntry={(id) => editor.chain().focus().toggleWikiLink({ href: id, wikiId: wiki })}
-          onEntry={() => { }}
-          placeholderText={"Insert page id here"}
-        >
-          <ArticleIcon />
-        </ToolbarButtonInput> */}
       </ToolbarGroup>
       <ToolbarGroup endItem>
-        <ToolbarButton onClick={() => editor.chain().focus().undo().run()}>
+        <ToolbarButton
+          onClick={() => editor.chain().focus().undo().run()}
+          title={"Undo"}
+        >
           <UndoIcon />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().redo().run()}>
+        <ToolbarButton
+          onClick={() => editor.chain().focus().redo().run()}
+          title={"Redo"}
+        >
           <RedoIcon />
         </ToolbarButton>
       </ToolbarGroup>
