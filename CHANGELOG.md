@@ -3,9 +3,11 @@
 # Added
 
 - Added tooltips to existing icon buttons (#33)
+- Added message when page content fails to load (#56)
 
 # Fixed
 
 - Fixed accessibility issues with icon buttons having no label / title (#33)
+- Fixed issue with wiki page content not updating properly client side after saving (#56)
 
 # Changed
