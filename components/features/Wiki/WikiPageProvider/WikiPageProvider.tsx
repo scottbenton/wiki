@@ -106,34 +106,28 @@ export const WikiPageProvider: React.FC = (props) => {
       wikiId && pageId ? { loading: true } : { loading: false }
     );
 
-    let unsubscribe: () => void;
     if (wikiId && pageId) {
-      unsubscribe = firestore()
+      firestore()
         .collection(WikiCollectionName)
         .doc(wikiId)
         .collection(WikiPageSubCollectionName)
         .doc(pageId)
         .collection(WikiPageContentSubCollectionName)
         .doc(WikiPageContentSubCollectionName)
-        .onSnapshot(
-          (snapshot) => {
-            setPageContentState({
-              loading: false,
-              data: snapshot.data() as WikiPageContent,
-            });
-          },
-          (error) => {
-            setPageContentState({
-              loading: false,
-              error: error.message,
-            });
-          }
-        );
+        .get()
+        .then((snapshot) => {
+          setPageContentState({
+            loading: false,
+            data: snapshot.data() as WikiPageContent,
+          });
+        })
+        .catch((error) => {
+          setPageContentState({
+            loading: false,
+            error: error.message,
+          });
+        });
     }
-
-    return () => {
-      unsubscribe && unsubscribe();
-    };
   }, [wikiId, pageId]);
 
   const deleteWiki = async (wikiId: string) => {
@@ -252,7 +246,20 @@ export const WikiPageProvider: React.FC = (props) => {
       .doc(pageId)
       .collection(WikiPageContentSubCollectionName)
       .doc("content")
-      .set({ content: content });
+      .set({ content: content })
+      .then(() => {
+        setPageContentState({
+          loading: false,
+          data: { content: content },
+        });
+      })
+      .catch((error) => {
+        console.debug(error?.message);
+        setPageContentState({
+          loading: false,
+          error: error?.message || "Updating page content failed.",
+        });
+      });
   };
 
   return (
