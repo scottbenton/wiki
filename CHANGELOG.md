@@ -11,3 +11,5 @@
 - Fixed issue with wiki page content not updating properly client side after saving (#56)
 
 # Changed
+
+- Updated firebase to the latest version & extracted all logic out to domain folder

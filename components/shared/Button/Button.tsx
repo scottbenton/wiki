@@ -47,7 +47,10 @@ const variantMap: { [variant in ButtonVariants]: string } = {
   text: "btn-text",
 };
 
-export const Button: React.FC<ButtonProps> = (props) => {
+export const Button = React.forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>((props, ref) => {
   const {
     children,
     variant = "text",
@@ -62,8 +65,6 @@ export const Button: React.FC<ButtonProps> = (props) => {
   } = props;
 
   const descriptiveId = id + "-button";
-
-  const Element = href ? "span" : "button";
 
   const combinedProps = {
     className: clsx(
@@ -82,29 +83,13 @@ export const Button: React.FC<ButtonProps> = (props) => {
     ...buttonProps,
   };
 
-  const MyButton = () => (
-    <Element
-      className={clsx(
-        "btn",
-        variantMap[variant],
-        classMap[color][variant],
-        className
-      )}
-      onClick={(evt) => {
-        evt.currentTarget.blur();
-        onClick && onClick(evt);
-      }}
-      disabled={disabled || loading}
-      id={descriptiveId}
-      data-testid={descriptiveId}
-      {...buttonProps}
-    ></Element>
-  );
-
   if (href) {
     return (
       <Link href={href}>
-        <a {...combinedProps}>
+        <a
+          {...combinedProps}
+          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+        >
           {loading && <Spinner className={"mr-2"} diameter={16} />}
           {children}
         </a>
@@ -112,10 +97,13 @@ export const Button: React.FC<ButtonProps> = (props) => {
     );
   } else {
     return (
-      <button {...combinedProps}>
+      <button
+        {...combinedProps}
+        ref={ref as React.ForwardedRef<HTMLButtonElement>}
+      >
         {loading && <Spinner className={"mr-2"} diameter={16} />}
         {children}
       </button>
     );
   }
-};
+});

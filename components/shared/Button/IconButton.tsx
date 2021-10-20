@@ -9,12 +9,14 @@ export interface IconButtonProps extends ButtonProps {
   title: string;
 }
 
-export const IconButton: React.FC<IconButtonProps> = (props) => {
+export const IconButton = React.forwardRef<
+  HTMLButtonElement | HTMLAnchorElement, IconButtonProps>((props, ref) => {
   const { className, square, small, title, ...buttonProps } = props;
 
   return (
     <Tooltip content={title}>
       <Button
+        ref={ref}
         aria-label={title}
         {...buttonProps}
         className={clsx(
@@ -26,4 +28,4 @@ export const IconButton: React.FC<IconButtonProps> = (props) => {
       />
     </Tooltip>
   );
-};
+});

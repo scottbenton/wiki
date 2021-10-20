@@ -177,6 +177,20 @@ html {
   }
 }
 
+@layer components {
+  .menu-surface {
+    @apply absolute z-50 flex flex-col overflow-hidden rounded-b-lg shadow-lg focus:outline-none bg-gray-900 text-white text-sm py-1;
+  }
+
+  .menu-item {
+    @apply py-1 px-4 hover:bg-gray-700 font-semibold text-left flex justify-between;
+  }
+
+  .menu-item-selected {
+    @apply bg-gray-600;
+  }
+}
+
 @layer utilities {
   .underlined-link {
     @apply cursor-pointer;

@@ -1,16 +1,30 @@
-import { WikiCollectionName } from "domain/Wiki";
-import { WikiPage, WikiPageSubCollectionName } from "domain/WikiPage";
 import {
+  updateWikiAddChildPage,
+  updateWikiRemoveChildPage,
+  deleteWiki as delWiki,
+} from "domain/Wiki";
+import {
+  createWikiPage,
+  deleteWikiPage,
+  updateWikiPage,
+  updateWikiPageAddChildPage,
+  updateWikiPageRemoveChildPage,
+  watchAllWikiPages,
+  WikiPage,
+  WikiPageObject,
+} from "domain/WikiPage";
+import {
+  getWikiPageContent,
+  updateWikiPageContent,
   WikiPageContent,
-  WikiPageContentSubCollectionName,
 } from "domain/WikiPageContent";
 import { DataState } from "domain/DataState";
-import { firestore } from "lib/firebase";
 import { useRouter } from "next/router";
 import { useAuth } from "providers/AuthProvider";
 import { useWikiList } from "providers/WikiListProvider";
 import React, { useEffect, useState } from "react";
 import { WikiPageContext } from "./WikiPageContext";
+import { DocumentReference } from "@firebase/firestore";
 
 export const WikiPageProvider: React.FC = (props) => {
   const { children } = props;
@@ -26,9 +40,9 @@ export const WikiPageProvider: React.FC = (props) => {
   );
   const currentWiki = wikiState.data && wikiState.data[wikiId];
 
-  const [wikiPages, setWikiPages] = useState<
-    DataState<{ [key: string]: WikiPage }>
-  >({ loading: true });
+  const [wikiPages, setWikiPages] = useState<DataState<WikiPageObject>>({
+    loading: true,
+  });
 
   const pageId =
     Array.isArray(wikiParams) && wikiParams.length > 1 ? wikiParams[2] : "";
@@ -62,30 +76,11 @@ export const WikiPageProvider: React.FC = (props) => {
 
     let unsubscribe: () => void;
     if (wikiId) {
-      unsubscribe = firestore()
-        .collection(WikiCollectionName)
-        .doc(wikiId)
-        .collection(WikiPageSubCollectionName)
-        .onSnapshot(
-          (snapshot) => {
-            let docs: { [id: string]: WikiPage } = {};
-
-            snapshot.docs.forEach((doc) => {
-              docs[doc.id] = doc.data() as WikiPage;
-            });
-
-            setWikiPages({
-              loading: false,
-              data: docs,
-            });
-          },
-          (error) => {
-            setWikiPages({
-              loading: false,
-              error: error.message,
-            });
-          }
-        );
+      unsubscribe = watchAllWikiPages(wikiId, {
+        onValue: (value) => setWikiPages({ loading: false, data: value }),
+        onError: (error) =>
+          setWikiPages({ loading: false, error: error.message }),
+      });
     }
 
     return () => {
@@ -107,24 +102,20 @@ export const WikiPageProvider: React.FC = (props) => {
     );
 
     if (wikiId && pageId) {
-      firestore()
-        .collection(WikiCollectionName)
-        .doc(wikiId)
-        .collection(WikiPageSubCollectionName)
-        .doc(pageId)
-        .collection(WikiPageContentSubCollectionName)
-        .doc(WikiPageContentSubCollectionName)
-        .get()
-        .then((snapshot) => {
+      getWikiPageContent(wikiId, pageId)
+        .then((content) => {
           setPageContentState({
             loading: false,
-            data: snapshot.data() as WikiPageContent,
+            data: content.data,
           });
         })
         .catch((error) => {
           setPageContentState({
             loading: false,
-            error: error.message,
+            error:
+              typeof error === "string"
+                ? error
+                : error?.message || "Error loading page content.",
           });
         });
     }
@@ -135,132 +126,88 @@ export const WikiPageProvider: React.FC = (props) => {
       const wikiToDelete = wikiState.data[wikiId];
 
       if (wikiToDelete.userRoles[user.uid].canDelete) {
-        const promises = wikiToDelete.rootPages.map((pageId) =>
-          deletePage(pageId)
-        );
-
-        await Promise.all(promises);
-
-        await firestore().collection(WikiCollectionName).doc(wikiId).delete();
+        await delWiki(wikiId);
       }
     }
   };
 
-  const createPage = (wikiPage: WikiPage, parentPageId?: string) => {
-    if (wikiId) {
-      firestore()
-        .collection(WikiCollectionName)
-        .doc(wikiId)
-        .collection(WikiPageSubCollectionName)
-        .add(wikiPage)
-        .then((doc) => {
-          const newId = doc.id;
-
-          if (parentPageId && wikiPages.data && wikiPages.data[parentPageId]) {
-            let parentDoc = { ...wikiPages.data[parentPageId] };
-            parentDoc.childPages = [...parentDoc.childPages, newId];
-
-            firestore()
-              .collection(WikiCollectionName)
-              .doc(wikiId)
-              .collection(WikiPageSubCollectionName)
-              .doc(parentPageId)
-              .set(parentDoc);
-          } else if (wikiState.data && wikiState.data[wikiId]) {
-            let newWiki = { ...wikiState.data[wikiId] };
-            newWiki.rootPages = [...newWiki.rootPages, newId];
-
-            updateWiki(wikiId, newWiki);
-          }
-        });
-    }
-  };
+  const createPage = (wikiPage: WikiPage, parentPageId?: string) =>
+    new Promise<DocumentReference<WikiPage>>((resolve, reject) => {
+      if (wikiId) {
+        createWikiPage(wikiId, wikiPage)
+          .then((newDoc) => {
+            if (parentPageId) {
+              updateWikiPageAddChildPage(wikiId, parentPageId, newDoc.id);
+            } else {
+              updateWikiAddChildPage(wikiId, newDoc.id);
+            }
+          })
+          .catch((e) => {
+            reject(e);
+          });
+      }
+      reject("Wiki not found");
+    });
 
   const updatePage = async (pageId: string, wikiPage: WikiPage) => {
-    await firestore()
-      .collection(WikiCollectionName)
-      .doc(wikiId)
-      .collection(WikiPageSubCollectionName)
-      .doc(pageId)
-      .set(wikiPage);
+    updateWikiPage(wikiId, pageId, wikiPage);
   };
 
   const deletePage = async (pageId: string) => {
-    if (wikiPages.data && wikiPages.data[pageId] && currentWiki) {
+    if (wikiPages.data && wikiPages.data[pageId]) {
       const parentPageId = wikiPages.data[pageId].parentPage;
-      await deletePageRecursive(pageId);
-
-      if (parentPageId) {
-        const parentPage = wikiPages.data[parentPageId];
-        let updatedParentPage = { ...parentPage };
-        updatedParentPage.childPages = updatedParentPage.childPages.filter(
-          (childId) => childId !== pageId
-        );
-
-        await updatePage(parentPageId, updatedParentPage);
-      } else {
-        let updatedWiki = { ...currentWiki };
-        updatedWiki.rootPages = updatedWiki.rootPages.filter(
-          (childId) => childId !== pageId
-        );
-
-        await updateWiki(wikiId, updatedWiki);
-      }
-    }
-  };
-
-  const deletePageRecursive = async (pageId: string) => {
-    const pageToDelete = wikiPages.data && wikiPages.data[pageId];
-    if (pageToDelete) {
-      const promiseArray = pageToDelete.childPages.map((childPageId) =>
-        deletePageRecursive(childPageId)
-      );
-      await Promise.all(promiseArray);
-      await firestore()
-        .collection(WikiCollectionName)
-        .doc(wikiId)
-        .collection(WikiPageSubCollectionName)
-        .doc(pageId)
-        .collection(WikiPageContentSubCollectionName)
-        .doc(WikiPageContentSubCollectionName)
-        .delete();
-
-      await firestore()
-        .collection(WikiCollectionName)
-        .doc(wikiId)
-        .collection(WikiPageSubCollectionName)
-        .doc(pageId)
-        .delete();
-    }
-    return 0;
-  };
-
-  const updatePageContent = (pageId: string, content: string) => {
-    setPageContentState({
-      loading: true,
-    });
-    firestore()
-      .collection(WikiCollectionName)
-      .doc(wikiId)
-      .collection(WikiPageSubCollectionName)
-      .doc(pageId)
-      .collection(WikiPageContentSubCollectionName)
-      .doc("content")
-      .set({ content: content })
-      .then(() => {
-        setPageContentState({
-          loading: false,
-          data: { content: content },
-        });
-      })
-      .catch((error) => {
-        console.debug(error?.message);
-        setPageContentState({
-          loading: false,
-          error: error?.message || "Updating page content failed.",
-        });
+      deleteWikiPage(wikiId, pageId).then(() => {
+        if (parentPageId) {
+          updateWikiPageRemoveChildPage(wikiId, parentPageId, pageId);
+        } else {
+          updateWikiRemoveChildPage(wikiId, pageId);
+        }
       });
+    }
   };
+
+  const updatePageContent = (pageId: string, content: string) =>
+    new Promise<string>((resolve, reject) => {
+      setPageContentState({
+        loading: true,
+      });
+      updateWikiPageContent(wikiId, pageId, content)
+        .then((data) => {
+          setPageContentState({
+            loading: false,
+            data: { content: data.data?.content ?? "" },
+          });
+          resolve(data.data?.content || "");
+        })
+        .catch((error) => {
+          setPageContentState({
+            loading: false,
+            error:
+              typeof error === "string"
+                ? error
+                : error?.message || "Error updating page content.",
+          });
+          reject(error);
+        });
+    });
+
+  const duplicatePage = (pageId: string) =>
+    new Promise((resolve, reject) => {
+      if (wikiPages.data) {
+        const page = wikiPages.data[pageId];
+
+        let newPage: WikiPage = {
+          parentPage: page.parentPage,
+          title: page.title,
+          childPages: [],
+        };
+        // const content =
+
+        // createPage(newPage, page.parentPage).then(document => {
+
+        // })
+      }
+    });
 
   return (
     <WikiPageContext.Provider
@@ -289,6 +236,8 @@ export const WikiPageProvider: React.FC = (props) => {
         updatePage,
         updatePageContent,
         deletePage,
+
+        // duplicatePage,
       }}
     >
       {children}

@@ -1,6 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
+import { initializeApp, FirebaseApp } from "firebase/app";
+import { getAuth, Auth } from "firebase/auth";
+import { getFirestore, Firestore } from "firebase/firestore";
+import { getFunctions, Functions } from "firebase/functions";
 
 const credentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
@@ -8,24 +9,33 @@ const credentials = {
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 };
 
-export function initializeApp() {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(credentials);
+class Firebase {
+  private app: FirebaseApp;
+  private fbDB: Firestore;
+  private fbAuth: Auth;
+  private fbFunctions: Functions;
+
+  constructor() {
+    this.app = initializeApp(credentials);
+    this.fbDB = getFirestore();
+    this.fbAuth = getAuth();
+    this.fbFunctions = getFunctions();
+  }
+
+  get db() {
+    return this.fbDB;
+  }
+  get auth() {
+    return this.fbAuth;
+  }
+  get functions() {
+    return this.fbFunctions;
   }
 }
 
-export function firestore() {
-  initializeApp();
-  return firebase.firestore();
-}
+export const firebase = new Firebase();
+Object.freeze(firebase);
 
-export function auth() {
-  initializeApp();
-  return firebase.auth();
-}
-
-export function googleAuthProvider() {
-  return new firebase.auth.GoogleAuthProvider();
-}
-
-export interface User extends firebase.User {}
+export const db = firebase.db;
+export const auth = firebase.auth;
+export const functions = firebase.functions;

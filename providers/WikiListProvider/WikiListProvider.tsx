@@ -1,9 +1,16 @@
-import { Wiki, WikiCollectionName } from "domain/Wiki";
+import {
+  Wiki,
+  WikiCollectionName,
+  watchUsersWikis,
+  WikiObject,
+  createWiki,
+  updateWiki,
+} from "domain/Wiki";
 import { useFBData } from "hooks/useFBData";
 import { useAuth } from "providers/AuthProvider";
 import React, { useEffect } from "react";
 import { WikiListContext, WikiMap } from "./WikiListContext";
-import { firestore } from "lib/firebase";
+
 export const WikiListProvider: React.FC = (props) => {
   const { children } = props;
 
@@ -11,28 +18,19 @@ export const WikiListProvider: React.FC = (props) => {
   const id = user?.uid;
 
   const { loadData, setErrorMessage, setLoading, ...wikiState } =
-    useFBData<WikiMap>();
+    useFBData<WikiObject>();
 
   useEffect(() => {
     let unsubscribe: () => void;
 
     if (id) {
-      unsubscribe = firestore()
-        .collection(WikiCollectionName)
-        .where("userIds", "array-contains", id)
-        .onSnapshot(
-          (snapshot) => {
-            let wikis: WikiMap = {};
-            snapshot.docs.forEach((doc) => {
-              wikis[doc.id] = doc.data() as Wiki;
-            });
-            loadData(wikis);
-          },
-          (error) => {
-            console.error(error);
-            setErrorMessage(error.message);
-          }
-        );
+      unsubscribe = watchUsersWikis(id, {
+        onValue: (wikis) => loadData(wikis),
+        onError: (error) => {
+          console.error(error);
+          setErrorMessage(error.message);
+        },
+      });
     }
 
     return () => {
@@ -40,16 +38,22 @@ export const WikiListProvider: React.FC = (props) => {
     };
   }, [id]);
 
-  const createWiki = (wiki: Wiki) => {
-    firestore().collection(WikiCollectionName).add(wiki);
+  const createNewWiki = async (wiki: Wiki) => {
+    await createWiki(wiki);
   };
 
-  const updateWiki = async (id: string, wiki: Wiki) => {
-    await firestore().collection(WikiCollectionName).doc(id).set(wiki);
+  const updateExistingWiki = async (id: string, wiki: Wiki) => {
+    await updateWiki(id, wiki);
   };
 
   return (
-    <WikiListContext.Provider value={{ wikiState, createWiki, updateWiki }}>
+    <WikiListContext.Provider
+      value={{
+        wikiState,
+        createWiki: createNewWiki,
+        updateWiki: updateExistingWiki,
+      }}
+    >
       {children}
     </WikiListContext.Provider>
   );

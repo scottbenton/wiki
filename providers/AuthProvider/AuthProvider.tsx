@@ -1,10 +1,11 @@
 import React from "react";
 import { AuthContext } from "./AuthContext";
-import { auth, googleAuthProvider, User, firestore } from "lib/firebase";
-import { User as DBUser, UserCollectionName } from "domain/User";
+import { auth, googleAuthProvider, User, db } from "lib/firebase";
+import { updateUser, User as DBUser, UserCollectionName } from "domain/User";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { signInWithPopup, signOut } from "@firebase/auth";
 
 export const AuthProvider: React.FC = (props) => {
   const { children } = props;
@@ -15,7 +16,7 @@ export const AuthProvider: React.FC = (props) => {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged((state) => {
+    const unsubscribe = auth.onAuthStateChanged((state) => {
       setUser(state ?? undefined);
       setLoading(false);
 
@@ -26,18 +27,7 @@ export const AuthProvider: React.FC = (props) => {
           displayName: state.displayName ?? state.email ?? "New User",
           avatarUrl: state.photoURL ?? undefined,
         };
-        firestore()
-          .collection(UserCollectionName)
-          .doc(state.uid)
-          .get()
-          .then((doc) => {
-            if (!doc.data()) {
-              firestore()
-                .collection(UserCollectionName)
-                .doc(state.uid)
-                .set(newUser);
-            }
-          });
+        updateUser(state.uid, newUser);
       }
     });
 
@@ -48,9 +38,7 @@ export const AuthProvider: React.FC = (props) => {
 
   const signInWithGoogle = () => {
     setLoading(true);
-    const provider = googleAuthProvider();
-    auth()
-      .signInWithPopup(provider)
+    signInWithPopup(auth, googleAuthProvider)
       .then(() => {
         router.push("/wikis");
       })
@@ -62,10 +50,12 @@ export const AuthProvider: React.FC = (props) => {
       });
   };
 
-  const signOut = () => {
+  const signOutFn = () => {
     setLoading(true);
-    auth()
-      .signOut()
+    signOut(auth)
+      .then(() => {
+        router.push("/");
+      })
       .catch((e) => {
         console.error("Error signing out:", e);
       })
@@ -75,7 +65,9 @@ export const AuthProvider: React.FC = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loading, user, signInWithGoogle, signOut }}>
+    <AuthContext.Provider
+      value={{ loading, user, signInWithGoogle, signOut: signOutFn }}
+    >
       {children}
     </AuthContext.Provider>
   );

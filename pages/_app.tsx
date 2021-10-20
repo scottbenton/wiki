@@ -1,11 +1,8 @@
 import Head from "next/head";
 import React from "react";
 import "styles/globals.css";
-import { initializeApp } from "lib/firebase";
 import { AppProviders } from "providers";
 import "@fontsource/inter/variable.css";
-
-initializeApp();
 
 export interface MyAppProps {
   Component: new () => React.Component<any>;

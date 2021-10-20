@@ -2,9 +2,13 @@ import { Button, IconButton } from "components/shared/Button";
 import React, { useState } from "react";
 import { wikiPageConfig } from "../../WikiPageConfig";
 import { useWikiPage } from "../../WikiPageProvider";
-import DeleteIcon from "@heroicons/react/outline/TrashIcon";
+import DeleteIcon from "@heroicons/react/solid/TrashIcon";
+import OverflowIcon from "@heroicons/react/outline/DotsVerticalIcon";
 import { Dialog } from "components/shared/Dialog";
 import { useRouter } from "next/router";
+import { Menu } from "@headlessui/react";
+import clsx from "clsx";
+import DuplicateIcon from "@heroicons/react/solid/DuplicateIcon";
 
 export const ViewWikiPageToolbar: React.FC = (props) => {
   const { wikiId, deletePage, currentPageId, currentPage } = useWikiPage();
@@ -35,22 +39,54 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
 
   return (
     <div className={"flex space-x-2"}>
-      <IconButton
-        id={"delete-page"}
-        square
-        onClick={() => setConfirmDeleteDialogOpen(true)}
-        title={"Delete Current Page"}
-      >
-        <DeleteIcon className={"w-5 h-5"} />
-      </IconButton>
       <Button
         id={"edit-page"}
         variant={"contained"}
         color={"primary"}
         href={wikiPageConfig.editPage.constructPath(wikiId, currentPageId)}
       >
-        Edit Page
+        Edit
       </Button>
+      <Menu as="div" className={"relative"}>
+        <Menu.Button
+          as={IconButton}
+          title={"More Options"}
+          className={"btn"}
+          square
+        >
+          <OverflowIcon className={"w-5 h-5"} />
+        </Menu.Button>
+        <Menu.Items className={"menu-surface right-0 rounded-lg w-48"}>
+          <Menu.Item>
+            {({ active }) => (
+              <button
+                className={clsx(
+                  "menu-item",
+                  active ? "menu-item-selected" : ""
+                )}
+                onClick={() => alert("DUPLICATE CLICKED")}
+              >
+                Duplicate Page
+                <DuplicateIcon className={"w-5 h-5 ml-2"} />
+              </button>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <button
+                className={clsx(
+                  "menu-item",
+                  active ? "menu-item-selected" : ""
+                )}
+                onClick={() => setConfirmDeleteDialogOpen(true)}
+              >
+                Delete Page
+                <DeleteIcon className={"w-5 h-5 ml-2"} />
+              </button>
+            )}
+          </Menu.Item>
+        </Menu.Items>
+      </Menu>
       <Dialog
         open={confirmDeleteDialogOpen}
         handleClose={() => setConfirmDeleteDialogOpen(false)}

@@ -3,6 +3,7 @@ import { WikiPage } from "domain/WikiPage";
 import { WikiPageContent } from "domain/WikiPageContent";
 import { DataState } from "domain/DataState";
 import { createContext } from "react";
+import { DocumentReference } from "@firebase/firestore";
 
 export interface IWikiPageContext {
   wikiId: string;
@@ -17,10 +18,15 @@ export interface IWikiPageContext {
   updateWiki: (id: string, wiki: Wiki) => void;
   deleteWiki: (id: string) => void;
 
-  createPage: (newPage: WikiPage, parentPageId?: string) => void;
+  createPage: (
+    newPage: WikiPage,
+    parentPageId?: string
+  ) => Promise<DocumentReference<WikiPage>>;
   updatePage: (pageId: string, wikiPage: WikiPage) => void;
-  updatePageContent: (pageId: string, content: string) => void;
+  updatePageContent: (pageId: string, content: string) => Promise<string>;
   deletePage: (pageId: string) => void;
+
+  // duplicatePage: (pageId: string) => Promise<string>;
 }
 
 export const WikiPageContext = createContext<IWikiPageContext>({
@@ -34,8 +40,10 @@ export const WikiPageContext = createContext<IWikiPageContext>({
   updateWiki: () => {},
   deleteWiki: () => {},
 
-  createPage: () => {},
+  createPage: () => new Promise(() => {}),
   updatePage: () => {},
-  updatePageContent: () => {},
+  updatePageContent: () => new Promise(() => {}),
   deletePage: () => {},
+
+  // duplicatePage: () => new Promise(() => {}),
 });

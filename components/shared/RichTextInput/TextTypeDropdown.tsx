@@ -74,16 +74,10 @@ export const TextTypeDropdown: React.FC<TextTypeDropdownProps> = (props) => {
           <MenuOpenIcon className={"w-5 h-5"} />
         </Popover.Button>
       </div>
-      <Popover.Panel
-        className={
-          "absolute z-50 flex flex-col overflow-hidden w-full rounded-b-lg shadow-lg focus:outline-none bg-gray-900 text-white text-sm py-1"
-        }
-      >
+      <Popover.Panel className={"menu-surface w-full"}>
         {Object.keys(textLabels).map((key, index) => (
           <button
-            className={clsx(
-              "py-1 px-4 hover:bg-gray-700 font-semibold text-left"
-            )}
+            className={clsx("menu-item")}
             onClick={(evt) => setActiveTextType(evt, key as TEXT_TYPES)}
             key={index}
           >
