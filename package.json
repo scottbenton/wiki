@@ -12,9 +12,9 @@
     "firebase:deploy:functions:dev": "cd firebase && firebase deploy -P dev --only functions",
     "-- PROD SCRIPTS --": "",
     "start": "next start",
-    "build:next": "next build",
     "-- CI --": "",
-    "build": "npm run next:build && npm run firebase:deploy:ci",
+    "build:next": "next build",
+    "build": "npm run build:next && npm run firebase:deploy:ci",
     "firebase:deploy:ci": "cd firebase && firebase deploy -P $FIREBASE_CI_ENV --token $FIREBASE_CI_TOKEN"
   },
   "dependencies": {
