@@ -5,10 +5,13 @@ import {
   collection,
   doc,
   DocumentReference,
+  DocumentSnapshot,
   getDoc,
   getDocs,
   onSnapshot,
+  Query,
   query,
+  QuerySnapshot,
   setDoc,
   updateDoc,
 } from "@firebase/firestore";
@@ -110,9 +113,10 @@ export function watchWikiPage(
   }
 ) {
   const { onValue, onError } = observer;
-  return onSnapshot<WikiPage>(getWikiPageRef(wikiId, pageId), {
-    next: (snapshot) => onValue({ id: snapshot.id, data: snapshot.data() }),
-    error: onError,
+  return onSnapshot<WikiPage>(getWikiPageRef(wikiId, pageId) as any, {
+    next: (snapshot) =>
+      onValue({ id: snapshot.id, data: snapshot.data() }) as any,
+    error: onError as any,
   });
 }
 
@@ -131,14 +135,19 @@ export function watchAllWikiPages(
 ) {
   const { onValue, onError } = observer;
   const allQuery = query(WikiPageSubCollection(wikiId));
-  return onSnapshot(allQuery, {
-    next: (snapshot) => {
-      let pages: WikiPageObject = {};
-      snapshot.docs.forEach((doc) => (pages[doc.id] = doc.data() as WikiPage));
-      onValue(pages);
-    },
-    error: onError,
-  });
+  return onSnapshot(
+    allQuery as Query<WikiPage>,
+    {
+      next: (snapshot: QuerySnapshot<WikiPage>) => {
+        let pages: WikiPageObject = {};
+        snapshot.docs.forEach(
+          (doc) => (pages[doc.id] = doc.data() as WikiPage)
+        );
+        onValue(pages);
+      },
+      error: onError,
+    } as any
+  );
 }
 
 /**

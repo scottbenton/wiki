@@ -19,6 +19,7 @@ import { FirebaseError } from "@firebase/util";
 import { db } from "lib/firebase";
 import { FirebaseResponse } from "./FirebaseResponse";
 import { UserRoles } from "./UserRoles";
+import { QuerySnapshot } from "@google-cloud/firestore";
 
 export const WikiCollectionName = "wikis";
 export const WikiCollection = collection(db, WikiCollectionName);
@@ -101,7 +102,7 @@ export function watchUsersWikis(
   ) as Query<Wiki>;
 
   return onSnapshot<Wiki>(userQuery, {
-    next: (snapshot) => {
+    next: (snapshot: QuerySnapshot<Wiki>) => {
       let wikis: WikiObject = {};
       snapshot.docs.forEach((doc) => {
         wikis[doc.id] = doc.data() as Wiki;
@@ -109,7 +110,7 @@ export function watchUsersWikis(
       onValue(wikis);
     },
     error: onError,
-  });
+  } as any);
 }
 
 /**

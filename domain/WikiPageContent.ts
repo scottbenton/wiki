@@ -2,6 +2,7 @@ import {
   collection,
   doc,
   DocumentReference,
+  DocumentSnapshot,
   getDoc,
   onSnapshot,
   setDoc,
@@ -75,10 +76,14 @@ export function watchWikiPageContent(
   }
 ) {
   const { onValue, onError } = observer;
-  return onSnapshot<WikiPageContent>(getWikiPageContentRef(wikiId, pageId), {
-    next: (snapshot) => onValue({ id: snapshot.id, data: snapshot.data() }),
-    error: onError,
-  });
+  return onSnapshot<WikiPageContent>(
+    getWikiPageContentRef(wikiId, pageId) as any,
+    {
+      next: (snapshot: DocumentSnapshot<WikiPageContent>) =>
+        onValue({ id: snapshot.id, data: snapshot.data() }),
+      error: onError,
+    } as any
+  );
 }
 
 export function updateWikiPageContent(
