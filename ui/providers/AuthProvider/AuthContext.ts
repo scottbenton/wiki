@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { User } from "lib/firebase";
+import { User } from "firebase/auth";
 
 interface IAuthContext {
   user?: User;

@@ -1,49 +1,22 @@
 {
   "name": "willo-wiki",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.1.0",
+  "description": "Tree structure based note taking app",
   "scripts": {
-    "-- DEV SCRIPTS --": "",
-    "setup:dev": "npm i && cd firebase/functions && npm i",
-    "dev": "next dev",
-    "-- FIREBASE DEV --": "",
-    "firebase:deploy:dev": "cd firebase && firebase deploy -P dev",
-    "firebase:deploy:firestore:dev": "cd firebase && firebase deploy -P dev --only firestore",
-    "firebase:deploy:functions:dev": "cd firebase && firebase deploy -P dev --only functions",
-    "-- PROD SCRIPTS --": "",
-    "start": "next start",
-    "-- CI --": "",
-    "build:next": "next build",
-    "build": "npm run build:next && npm run firebase:deploy:ci",
-    "firebase:deploy:ci": "cd firebase && firebase deploy -P $FIREBASE_CI_ENV --token $FIREBASE_CI_TOKEN"
+    "-= DEV =-": "",
+    "setup:dev": "npm --prefix ./ui/ run setup:dev && npm --prefix ./firebase/ run setup:dev",
+    "start:dev": "npm --prefix ./ui/ run start:dev",
+    "-= CI =-": "",
+    "setup:ci": "npm --prefix ./ui run setup:ci && npm --prefix ./firebase/ run setup:ci",
+    "build:ci": "npm --prefix ./ui run build:ci && npm --prefix ./firebase/ run build:ci && npm --prefix ./firebase/ run deploy:ci"
   },
-  "dependencies": {
-    "@fontsource/inter": "^4.5.0",
-    "@fontsource/nunito": "^4.5.0",
-    "@headlessui/react": "^1.4.1",
-    "@heroicons/react": "^1.0.4",
-    "@tailwindcss/typography": "^0.4.1",
-    "@tippyjs/react": "^4.2.5",
-    "@tiptap/core": "^2.0.0-beta.122",
-    "@tiptap/extension-image": "^2.0.0-beta.17",
-    "@tiptap/extension-link": "^2.0.0-beta.21",
-    "@tiptap/extension-mention": "^2.0.0-beta.75",
-    "@tiptap/react": "^2.0.0-beta.81",
-    "@tiptap/starter-kit": "^2.0.0-beta.123",
-    "clsx": "^1.1.1",
-    "firebase": "^9.1.2",
-    "next": "latest",
-    "re-resizable": "^6.9.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "tippy.js": "^6.3.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottbenton/wiki.git"
   },
-  "devDependencies": {
-    "@types/react": "^17.0.29",
-    "autoprefixer": "^10.3.7",
-    "postcss": "^8.3.9",
-    "prettier": "2.3.1",
-    "tailwindcss": "^2.2.16",
-    "typescript": "^4.4.4"
-  }
+  "author": "Scott Benton",
+  "bugs": {
+    "url": "https://github.com/scottbenton/wiki/issues"
+  },
+  "homepage": "https://github.com/scottbenton/wiki#readme"
 }

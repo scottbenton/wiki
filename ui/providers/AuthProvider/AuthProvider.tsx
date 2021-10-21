@@ -1,11 +1,11 @@
 import React from "react";
 import { AuthContext } from "./AuthContext";
-import { auth, googleAuthProvider, User, db } from "lib/firebase";
-import { updateUser, User as DBUser, UserCollectionName } from "domain/User";
+import { auth, googleAuthProvider } from "lib/auth";
+import { updateUser, User as DBUser } from "domain/User";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { signInWithPopup, signOut } from "@firebase/auth";
+import { signInWithPopup, signOut, User } from "@firebase/auth";
 
 export const AuthProvider: React.FC = (props) => {
   const { children } = props;
