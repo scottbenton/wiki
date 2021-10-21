@@ -7,6 +7,6 @@
     "setup:dev": "npm --prefix ./functions/ i",
     "-= CI =-": "",
     "setup:ci": "npm --prefix ./functions/ i",
-    "deploy:ci": "cd firebase && firebase deploy -P $FIREBASE_CI_ENV --token $FIREBASE_CI_TOKEN"
+    "build:ci": "firebase deploy -P $FIREBASE_CI_ENV --token $FIREBASE_CI_TOKEN"
   }
 }

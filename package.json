@@ -7,8 +7,8 @@
     "setup:dev": "npm --prefix ./ui/ run setup:dev && npm --prefix ./firebase/ run setup:dev",
     "start:dev": "npm --prefix ./ui/ run start:dev",
     "-= CI =-": "",
-    "setup:ci": "npm --prefix ./ui run setup:ci && npm --prefix ./firebase/ run setup:ci",
-    "build:ci": "npm --prefix ./ui run build:ci && npm --prefix ./firebase/ run build:ci && npm --prefix ./firebase/ run deploy:ci"
+    "setup:ci": "npm --prefix ./ui/ run setup:ci && npm --prefix ./firebase/ run setup:ci",
+    "build:ci": "npm --prefix ./ui/ run build:ci && npm --prefix ./firebase/ run build:ci"
   },
   "repository": {
     "type": "git",
