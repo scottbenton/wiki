@@ -13,13 +13,13 @@ import {
   setDoc,
   updateDoc,
   where,
+  QuerySnapshot,
 } from "@firebase/firestore";
 import { deleteWiki as delWiki } from "lib/functions";
 import { FirebaseError } from "@firebase/util";
 import { db } from "lib/firebase";
 import { FirebaseResponse } from "./FirebaseResponse";
 import { UserRoles } from "./UserRoles";
-import { QuerySnapshot } from "@google-cloud/firestore";
 
 export const WikiCollectionName = "wikis";
 export const WikiCollection = collection(db, WikiCollectionName);
