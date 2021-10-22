@@ -3,7 +3,7 @@ import { WikiPage } from "domain/WikiPage";
 import { WikiPageContent } from "domain/WikiPageContent";
 import { DataState } from "domain/DataState";
 import { createContext } from "react";
-import { DocumentReference } from "@firebase/firestore";
+import { FirebaseResponse } from "domain/FirebaseResponse";
 
 export interface IWikiPageContext {
   wikiId: string;
@@ -21,7 +21,7 @@ export interface IWikiPageContext {
   createPage: (
     newPage: WikiPage,
     parentPageId?: string
-  ) => Promise<DocumentReference<WikiPage>>;
+  ) => Promise<FirebaseResponse<WikiPage>>;
   updatePage: (pageId: string, wikiPage: WikiPage) => void;
   updatePageContent: (pageId: string, content: string) => Promise<string>;
   deletePage: (pageId: string) => void;

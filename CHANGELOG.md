@@ -4,6 +4,7 @@
 
 - Added tooltips to existing icon buttons (#33)
 - Added message when page content fails to load (#56)
+- Added duplicate page button on View Wiki Page (#41)
 
 # Fixed
 
