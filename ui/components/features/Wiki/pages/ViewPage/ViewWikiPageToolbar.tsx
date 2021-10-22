@@ -11,20 +11,21 @@ import clsx from "clsx";
 import DuplicateIcon from "@heroicons/react/solid/DuplicateIcon";
 
 export const ViewWikiPageToolbar: React.FC = (props) => {
-  const { wikiId, deletePage, currentPageId, currentPage } = useWikiPage();
+  const { wikiId, deletePage, currentPageId, currentPage, duplicatePage } =
+    useWikiPage();
 
   const router = useRouter();
   const [confirmDeleteDialogOpen, setConfirmDeleteDialogOpen] =
     useState<boolean>(false);
 
-  const [pageDeleting, setPageDeleting] = useState<boolean>(false);
+  const [actionLoading, setActionLoading] = useState<boolean>(false);
 
   const handleDeleteClick = async () => {
     if (currentPage && currentPageId) {
-      setPageDeleting(true);
+      setActionLoading(true);
       const potentialPageToNavigateTo = currentPage.parentPage;
       await deletePage(currentPageId);
-      setPageDeleting(false);
+      setActionLoading(false);
       router.push(
         potentialPageToNavigateTo
           ? wikiPageConfig.viewPage.constructPath(
@@ -34,6 +35,15 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
           : wikiPageConfig.about.constructPath(wikiId)
       );
       setConfirmDeleteDialogOpen(false);
+    }
+  };
+
+  const handleDuplicateClick = async () => {
+    if (currentPageId) {
+      setActionLoading(true);
+      duplicatePage(currentPageId).finally(() => {
+        setActionLoading(false);
+      });
     }
   };
 
@@ -53,6 +63,7 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
           title={"More Options"}
           className={"btn"}
           square
+          disabled={actionLoading}
         >
           <OverflowIcon className={"w-5 h-5"} />
         </Menu.Button>
@@ -64,7 +75,7 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
                   "menu-item",
                   active ? "menu-item-selected" : ""
                 )}
-                onClick={() => alert("DUPLICATE CLICKED")}
+                onClick={() => handleDuplicateClick()}
               >
                 Duplicate Page
                 <DuplicateIcon className={"w-5 h-5 ml-2"} />
@@ -99,7 +110,7 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
             <Button
               id={"cancel"}
               onClick={() => setConfirmDeleteDialogOpen(false)}
-              disabled={pageDeleting}
+              disabled={actionLoading}
             >
               Cancel
             </Button>
@@ -108,7 +119,7 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
               color={"error"}
               variant={"contained"}
               onClick={handleDeleteClick}
-              loading={pageDeleting}
+              loading={actionLoading}
             >
               Delete
             </Button>

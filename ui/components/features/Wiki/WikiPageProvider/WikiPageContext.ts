@@ -26,7 +26,7 @@ export interface IWikiPageContext {
   updatePageContent: (pageId: string, content: string) => Promise<string>;
   deletePage: (pageId: string) => void;
 
-  // duplicatePage: (pageId: string) => Promise<string>;
+  duplicatePage: (pageId: string) => Promise<string>;
 }
 
 export const WikiPageContext = createContext<IWikiPageContext>({
@@ -45,5 +45,5 @@ export const WikiPageContext = createContext<IWikiPageContext>({
   updatePageContent: () => new Promise(() => {}),
   deletePage: () => {},
 
-  // duplicatePage: () => new Promise(() => {}),
+  duplicatePage: () => new Promise(() => {}),
 });

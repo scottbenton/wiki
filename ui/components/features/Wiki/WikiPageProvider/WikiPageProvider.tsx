@@ -25,6 +25,7 @@ import { useWikiList } from "providers/WikiListProvider";
 import React, { useEffect, useState } from "react";
 import { WikiPageContext } from "./WikiPageContext";
 import { DocumentReference } from "@firebase/firestore";
+import { FirebaseResponse } from "domain/FirebaseResponse";
 
 export const WikiPageProvider: React.FC = (props) => {
   const { children } = props;
@@ -132,7 +133,7 @@ export const WikiPageProvider: React.FC = (props) => {
   };
 
   const createPage = (wikiPage: WikiPage, parentPageId?: string) =>
-    new Promise<DocumentReference<WikiPage>>((resolve, reject) => {
+    new Promise<FirebaseResponse<WikiPage>>((resolve, reject) => {
       if (wikiId) {
         createWikiPage(wikiId, wikiPage)
           .then((newDoc) => {
@@ -141,12 +142,14 @@ export const WikiPageProvider: React.FC = (props) => {
             } else {
               updateWikiAddChildPage(wikiId, newDoc.id);
             }
+            resolve(newDoc);
           })
           .catch((e) => {
             reject(e);
           });
+      } else {
+        reject("Wiki not found");
       }
-      reject("Wiki not found");
     });
 
   const updatePage = async (pageId: string, wikiPage: WikiPage) => {
@@ -192,7 +195,7 @@ export const WikiPageProvider: React.FC = (props) => {
     });
 
   const duplicatePage = (pageId: string) =>
-    new Promise((resolve, reject) => {
+    new Promise<string>((resolve, reject) => {
       if (wikiPages.data) {
         const page = wikiPages.data[pageId];
 
@@ -201,11 +204,23 @@ export const WikiPageProvider: React.FC = (props) => {
           title: page.title,
           childPages: [],
         };
-        // const content =
 
-        // createPage(newPage, page.parentPage).then(document => {
-
-        // })
+        createPage(newPage, page.parentPage)
+          .then((pageDoc) => {
+            const newId = pageDoc.id;
+            getWikiPageContent(wikiId, pageId)
+              .then((contentResponse) => {
+                updatePageContent(newId, contentResponse.data?.content ?? "")
+                  .then(() => {
+                    resolve(newId);
+                  })
+                  .catch(reject);
+              })
+              .catch(reject);
+          })
+          .catch(reject);
+      } else {
+        reject("Data is not loaded");
       }
     });
 
@@ -237,7 +252,7 @@ export const WikiPageProvider: React.FC = (props) => {
         updatePageContent,
         deletePage,
 
-        // duplicatePage,
+        duplicatePage,
       }}
     >
       {children}
