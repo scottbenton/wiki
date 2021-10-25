@@ -1,5 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FeedbackContext } from "./FeedbackContext";
+import router from "next/router";
+
 export const FeedbackProvider: React.FC = (props) => {
   const { children } = props;
 
@@ -24,6 +26,15 @@ export const FeedbackProvider: React.FC = (props) => {
       return newKeys;
     });
   }, []);
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", () => {
+      updateLoadingKey("changePage", true);
+    });
+    router.events.on("routeChangeComplete", () => {
+      updateLoadingKey("changePage", false);
+    });
+  }, [updateLoadingKey]);
 
   return (
     <FeedbackContext.Provider value={{ loading: isLoading, updateLoadingKey }}>

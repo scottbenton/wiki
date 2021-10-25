@@ -25,7 +25,7 @@ export const Header: React.FC = (props) => {
           <Link href="/">
             <a
               className={
-                "flex items-center mr-2 md:mr-10 focus:bg-primary-200 focus:outline-none hover:bg-primary-200 p-1 rounded-md"
+                "flex items-center mr-2 md:mr-10 focus:bg-primary-200 hover:bg-primary-200 focus:outline-none hover:underline p-1 rounded-md"
               }
             >
               {isMobile ? (

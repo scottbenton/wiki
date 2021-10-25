@@ -5,6 +5,7 @@ import { MenuIcon } from "@heroicons/react/outline";
 import { useWikiPage } from "../WikiPageProvider";
 import { wikiPageConfig } from "../WikiPageConfig";
 import { CreateWikiPageButton } from "./CreateWikiPageButton";
+import { useIsMobile } from "hooks/useIsMobile";
 
 export interface WikiToolbarProps {
   toggleSidebar?: () => void;
@@ -16,8 +17,12 @@ export const WikiToolbar: React.FC<WikiToolbarProps> = (props) => {
   const { wikiId, info, currentPageId, createPage, currentPage } =
     useWikiPage();
 
+  const isMobile = useIsMobile();
+
   return (
-    <div className={"justify-between flex items-center py-2"}>
+    <div
+      className={"justify-between flex items-center py-2 flex-wrap space-y-2"}
+    >
       <div className={"flex items-center"}>
         {toggleSidebar && (
           <IconButton
@@ -35,12 +40,14 @@ export const WikiToolbar: React.FC<WikiToolbarProps> = (props) => {
           </h1>
         </Link>
       </div>
-      <div className={"flex flex-wrap space-x-2"}>
-        <CreateWikiPageButton
-          createPage={createPage}
-          currentPageId={currentPageId}
-          currentPage={currentPage}
-        />
+      <div className={"flex flex-wrap space-x-2 justify-end flex-grow"}>
+        {!isMobile && (
+          <CreateWikiPageButton
+            createPage={createPage}
+            currentPageId={currentPageId}
+            currentPage={currentPage}
+          />
+        )}
         {ToolbarItems && <ToolbarItems />}
       </div>
     </div>

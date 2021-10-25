@@ -11,7 +11,7 @@ export const NavLink: React.FC<NavLinkProps> = (props) => {
     <Link href={href}>
       <a
         className={
-          "transition-opacity duration-300 ease-in-out cursor-pointer h-full px-2 font-semibold tracking-wide text-primary-700 uppercase bg-opacity-0 bg-primary-100 hover:bg-opacity-100 focus:ring-white focus:ring-opacity-50 focus:ring-2 flex items-center justify-center"
+          "cursor-pointer h-full px-2 font-semibold tracking-wide text-primary-700 uppercase  focus:ring-white focus:ring-opacity-50 focus:ring-2 flex items-center justify-center border-collapse border-b-4 pt-2 hover:border-primary-500 border-transparent duration-150 transition-colors ease-in-out"
         }
       >
         {children}
