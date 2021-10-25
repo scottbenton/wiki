@@ -41,7 +41,7 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
       className={clsx(
         "flex text-gray-700",
         href
-          ? "hover:bg-gray-200 rounded-lg"
+          ? "hover:bg-gray-300 rounded-lg"
           : "border-b-2 border-gray-300 italic",
         isSelected ? "bg-gray-300" : ""
       )}

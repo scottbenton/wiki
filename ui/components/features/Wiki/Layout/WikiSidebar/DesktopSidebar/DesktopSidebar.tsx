@@ -10,7 +10,7 @@ export interface DesktopSidebarProps {
 
 const DEFAULT_SIZES = {
   width: 200,
-  height: "100%",
+  height: "auto",
 };
 
 export const DesktopSidebar: React.FC<DesktopSidebarProps> = (props) => {
@@ -39,12 +39,13 @@ export const DesktopSidebar: React.FC<DesktopSidebarProps> = (props) => {
   return (
     <Resizable
       className={clsx(
-        "bg-gray-100 border-r-2 duration-150 transition-colors ease-in-out",
+        "bg-gray-200 border-r-2 duration-150 transition-colors ease-in-out min-h-full resizable-desktop-sidebar",
         isResizeHovering ? "border-r-primary-500" : ""
       )}
       ref={resizeableRef}
       minWidth={open ? DEFAULT_SIZES.width : 0}
       maxWidth={"50%"}
+      minHeight={"100%"}
       handleComponent={{
         right: <DesktopSidebarHandle setIsHovering={setIsResizeHovering} />,
       }}
