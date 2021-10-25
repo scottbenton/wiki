@@ -6,6 +6,7 @@ import { WikiPage } from "components/features/Wiki/Layout";
 import { PageLayout } from "components/layout/PageLayout";
 import { Button } from "components/shared/Button";
 import { useAuth } from "providers/AuthProvider";
+
 const WikiBasePage: React.FC = (props) => {
   const { user } = useAuth();
   const router = useRouter();

@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import { IconButton } from "components/shared/Button";
+import { Button, IconButton } from "components/shared/Button";
 import { MenuIcon } from "@heroicons/react/outline";
 import { useWikiPage } from "../WikiPageProvider";
 import { wikiPageConfig } from "../WikiPageConfig";
+import { CreateWikiPageButton } from "./CreateWikiPageButton";
 
 export interface WikiToolbarProps {
   toggleSidebar?: () => void;
@@ -12,7 +13,8 @@ export interface WikiToolbarProps {
 
 export const WikiToolbar: React.FC<WikiToolbarProps> = (props) => {
   const { toggleSidebar, ToolbarItems } = props;
-  const { wikiId, info } = useWikiPage();
+  const { wikiId, info, currentPageId, createPage, currentPage } =
+    useWikiPage();
 
   return (
     <div className={"justify-between flex items-center py-2"}>
@@ -33,7 +35,14 @@ export const WikiToolbar: React.FC<WikiToolbarProps> = (props) => {
           </h1>
         </Link>
       </div>
-      {ToolbarItems && <ToolbarItems />}
+      <div className={"flex flex-wrap space-x-2"}>
+        <CreateWikiPageButton
+          createPage={createPage}
+          currentPageId={currentPageId}
+          currentPage={currentPage}
+        />
+        {ToolbarItems && <ToolbarItems />}
+      </div>
     </div>
   );
 };

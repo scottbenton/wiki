@@ -16,3 +16,7 @@ export * from "./TableIcon";
 export * from "./LinkIcon";
 export * from "./PhotoIcon";
 export * from "./ArticleIcon";
+
+export * from "./SubdirectoryIcon";
+
+export * from "./Icon.d";

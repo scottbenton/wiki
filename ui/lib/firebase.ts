@@ -1,6 +1,6 @@
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
-import { getFirestore, Firestore } from "firebase/firestore";
+import { initializeFirestore, Firestore } from "firebase/firestore";
 import { getFunctions, Functions } from "firebase/functions";
 
 const credentials = {
@@ -17,7 +17,9 @@ class Firebase {
 
   constructor() {
     this.app = initializeApp(credentials);
-    this.fbDB = getFirestore();
+    this.fbDB = initializeFirestore(this.app, {
+      ignoreUndefinedProperties: true,
+    });
     this.fbAuth = getAuth();
     this.fbFunctions = getFunctions();
   }

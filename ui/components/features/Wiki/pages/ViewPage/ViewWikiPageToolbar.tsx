@@ -6,7 +6,12 @@ import DeleteIcon from "@heroicons/react/solid/TrashIcon";
 import OverflowIcon from "@heroicons/react/outline/DotsVerticalIcon";
 import { Dialog } from "components/shared/Dialog";
 import { useRouter } from "next/router";
-import { Menu } from "@headlessui/react";
+import {
+  Menu,
+  MenuList,
+  MenuIconButton,
+  MenuItem,
+} from "components/shared/Menu";
 import clsx from "clsx";
 import DuplicateIcon from "@heroicons/react/solid/DuplicateIcon";
 
@@ -48,7 +53,7 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
   };
 
   return (
-    <div className={"flex space-x-2"}>
+    <>
       <Button
         id={"edit-page"}
         variant={"contained"}
@@ -57,46 +62,29 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
       >
         Edit
       </Button>
-      <Menu as="div" className={"relative"}>
-        <Menu.Button
-          as={IconButton}
+      <Menu>
+        <MenuIconButton
+          id={"more-options"}
           title={"More Options"}
-          className={"btn"}
           square
           disabled={actionLoading}
         >
           <OverflowIcon className={"w-5 h-5"} />
-        </Menu.Button>
-        <Menu.Items className={"menu-surface right-0 rounded-lg w-48"}>
-          <Menu.Item>
-            {({ active }) => (
-              <button
-                className={clsx(
-                  "menu-item",
-                  active ? "menu-item-selected" : ""
-                )}
-                onClick={() => handleDuplicateClick()}
-              >
-                Duplicate Page
-                <DuplicateIcon className={"w-5 h-5 ml-2"} />
-              </button>
-            )}
-          </Menu.Item>
-          <Menu.Item>
-            {({ active }) => (
-              <button
-                className={clsx(
-                  "menu-item",
-                  active ? "menu-item-selected" : ""
-                )}
-                onClick={() => setConfirmDeleteDialogOpen(true)}
-              >
-                Delete Page
-                <DeleteIcon className={"w-5 h-5 ml-2"} />
-              </button>
-            )}
-          </Menu.Item>
-        </Menu.Items>
+        </MenuIconButton>
+        <MenuList>
+          <>
+            <MenuItem
+              onClick={() => handleDuplicateClick()}
+              primaryText={"Duplicate Page"}
+              Icon={DuplicateIcon}
+            />
+            <MenuItem
+              onClick={() => setConfirmDeleteDialogOpen(true)}
+              primaryText={"Delete Page"}
+              Icon={DeleteIcon}
+            />
+          </>
+        </MenuList>
       </Menu>
       <Dialog
         open={confirmDeleteDialogOpen}
@@ -126,6 +114,6 @@ export const ViewWikiPageToolbar: React.FC = (props) => {
           </>
         }
       />
-    </div>
+    </>
   );
 };
