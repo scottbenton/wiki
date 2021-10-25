@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, HTMLAttributes } from "react";
 import Link from "next/link";
 import { Spinner } from "../Spinner";
 
@@ -14,6 +14,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   loading?: boolean;
   className?: string;
   href?: string;
+  StartIcon?: React.FC<HTMLAttributes<SVGSVGElement>>;
+  EndIcon?: React.FC<HTMLAttributes<SVGSVGElement>>;
 }
 
 const classMap: {
@@ -61,6 +63,8 @@ export const Button = React.forwardRef<
     id,
     onClick,
     href,
+    StartIcon,
+    EndIcon,
     ...buttonProps
   } = props;
 
@@ -90,8 +94,10 @@ export const Button = React.forwardRef<
           {...combinedProps}
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
         >
+          {StartIcon && <StartIcon className={"w-5 h-5 text-current mr-2"} />}
           {loading && <Spinner className={"mr-2"} diameter={16} />}
           {children}
+          {EndIcon && <EndIcon className={"w-5 h-5 text-current ml-2"} />}
         </a>
       </Link>
     );
@@ -101,8 +107,10 @@ export const Button = React.forwardRef<
         {...combinedProps}
         ref={ref as React.ForwardedRef<HTMLButtonElement>}
       >
+        {StartIcon && <StartIcon className={"w-5 h-5 text-current mr-2"} />}
         {loading && <Spinner className={"mr-2"} diameter={16} />}
         {children}
+        {EndIcon && <EndIcon className={"w-5 h-5 text-current ml-2"} />}
       </button>
     );
   }
