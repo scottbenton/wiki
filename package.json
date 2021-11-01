@@ -1,38 +1,22 @@
 {
-  "name": "with-tailwindcss",
-  "version": "0.1.0",
-  "private": true,
+  "name": "willo-wiki",
+  "version": "1.1.0",
+  "description": "Tree structure based note taking app",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "-= DEV =-": "",
+    "setup:dev": "npm --prefix ./ui/ run setup:dev && npm --prefix ./firebase/ run setup:dev",
+    "start:dev": "npm --prefix ./ui/ run start:dev",
+    "-= CI =-": "",
+    "setup:ci": "npm --prefix ./ui/ run setup:ci && npm --prefix ./firebase/ run setup:ci",
+    "build:ci": "npm --prefix ./ui/ run build:ci && npm --prefix ./firebase/ run build:ci"
   },
-  "dependencies": {
-    "@fontsource/inter": "^4.5.0",
-    "@fontsource/nunito": "^4.5.0",
-    "@headlessui/react": "^1.3.0",
-    "@heroicons/react": "^1.0.1",
-    "@tailwindcss/typography": "^0.4.1",
-    "@tiptap/core": "^2.0.0-beta.102",
-    "@tiptap/extension-image": "*",
-    "@tiptap/extension-link": "*",
-    "@tiptap/extension-mention": "*",
-    "@tiptap/react": "^2.0.0-beta.63",
-    "@tiptap/starter-kit": "*",
-    "clsx": "^1.1.1",
-    "firebase": "^8.6.8",
-    "next": "latest",
-    "re-resizable": "^6.9.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "tippy.js": "^6.3.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottbenton/wiki.git"
   },
-  "devDependencies": {
-    "@types/react": "^17.0.11",
-    "autoprefixer": "^10.0.4",
-    "postcss": "^8.1.10",
-    "prettier": "2.3.1",
-    "tailwindcss": "^2.1.1",
-    "typescript": "^4.3.4"
-  }
+  "author": "Scott Benton",
+  "bugs": {
+    "url": "https://github.com/scottbenton/wiki/issues"
+  },
+  "homepage": "https://github.com/scottbenton/wiki#readme"
 }

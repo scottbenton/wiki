@@ -1,0 +1,33 @@
+name: Deploy Firebase
+
+on: [push]
+
+jobs:
+  deploy_firebase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: setup
+        run: |
+          cd firebase && npm run setup:ci
+
+      - name: build-dev
+        if: github.ref != 'refs/heads/prod'
+        run: |
+          cd firebase
+          npx firebase-tools functions:config:set fb.token=${{ SECRETS.FIREBASE_CI_TOKEN }} -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
+          npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
+
+      - name: build-prod
+        if: github.ref == 'refs/heads/prod'
+        run: |
+          cd firebase
+          npx firebase-tools functions:config:set fb.token=${{ SECRETS.FIREBASE_CI_TOKEN }} -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
+          npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}

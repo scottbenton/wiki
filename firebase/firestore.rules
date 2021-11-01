@@ -1,0 +1,71 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    
+    match /wikis/{wiki} {   
+      function getWikiData() {
+        return get(/databases/$(database)/documents/wikis/$(wiki)).data;
+      }
+      function canUserReadWiki() {
+      	let wiki = getWikiData();
+        return (request.auth.uid != null && request.auth.uid in wiki.userIds) || wiki.isPublic;
+      }
+      function canUserUpdateWiki() {
+      	let wiki = getWikiData();
+        return request.auth.uid != null && wiki.userRoles[request.auth.uid].canWrite;
+      }
+      // function canUserDeleteWiki() {
+      // 	let wiki = getWikiData();
+      //   return request.auth.uid != null && wiki.userRoles[request.auth.uid].canDelete;
+      // }
+      
+    	// allow read, update, delete: if(request.auth.uid != null && request.auth.uid in resource.data.userIds) || resource.data.isPublic;
+    	allow read: if (request.auth.uid != null && request.auth.uid in resource.data.userIds) || resource.data.isPublic;
+    	allow update: if request.auth.uid != null && resource.data.userRoles[request.auth.uid].canWrite;
+    	allow delete: if request.auth.uid != null && resource.data.userRoles[request.auth.uid].canDelete;
+    
+    	allow create: if request.auth.uid != null;
+      
+    	// Hopefully match all subcollections?
+    	match /pages/{page}/{document=**} {
+        
+        allow read: if canUserReadWiki();
+        allow update, delete, create: if canUserUpdateWiki();
+      }
+    
+      // allow read: if request.auth != null && request.auth.uid in resource.data.users;
+      // allow read, update, delete: if request.auth != null && request.auth.uid in resource.data.admins;
+      // allow create: if request.auth != null;
+    }
+//         match /groups/{group} {
+//     	allow read: if request.auth != null && request.auth.uid in resource.data.users;
+//     	allow read, update, delete: if request.auth != null && request.auth.uid in resource.data.admins;
+//       allow create: if request.auth != null;
+      
+//     function groupData() {
+//       return get(/databases/$(database)/documents/groups/$(group)).data;
+//     }
+    
+//     match /wikis/{wiki} {
+//     	allow read: if request.auth != null && request.auth.uid in resource.data.users;
+//       allow read, update, delete: if request.auth != null && request.auth.uid in resource.data.admins;
+//       allow create: if request.auth != null && request.auth.uid in groupData().users;
+            
+//         function wikiData() {
+//         	return get(/databases/$(database)/documents/groups/$(group)/wikis/$(wiki)).data;
+//         }
+        
+//         match /nodes/{node=**} {
+//         	allow create, read, update, delete: if request.auth != null && request.auth.uid in wikiData().users;
+//         }
+//     }
+//   }
+  }
+}
