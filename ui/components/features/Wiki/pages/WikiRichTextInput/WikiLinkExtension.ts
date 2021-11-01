@@ -41,18 +41,13 @@ export function useWikiLinkExtensionScratch() {
         id: {
           default: null,
           parseHTML: (element) => {
-            return {
-              id: element.getAttribute("data-id"),
-            };
+            return element.getAttribute("data-id");
           },
           renderHTML: (attributes) => {
             if (!attributes.id) {
               return {};
             }
-
-            return {
-              "data-id": attributes.id,
-            };
+            return { "data-id": attributes.id };
           },
         },
       };
