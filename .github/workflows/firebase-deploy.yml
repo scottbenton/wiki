@@ -22,12 +22,12 @@ jobs:
         if: github.ref != 'refs/heads/prod'
         run: |
           cd firebase
-          npx firebase-tools functions:config:set fb.token=${{ SECRETS.FIREBASE_CI_TOKEN }} -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ FIREBASE_CI_TOKEN }}
+          npx firebase-tools functions:config:set fb.token=${{ SECRETS.FIREBASE_CI_TOKEN }} -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
           npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
 
       - name: build-prod
         if: github.ref == 'refs/heads/prod'
         run: |
           cd firebase
-          npx firebase-tools functions:config:set fb.token=${{ SECRETS.FIREBASE_CI_TOKEN }} -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ FIREBASE_CI_TOKEN }}
+          npx firebase-tools functions:config:set fb.token=${{ SECRETS.FIREBASE_CI_TOKEN }} -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
           npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
