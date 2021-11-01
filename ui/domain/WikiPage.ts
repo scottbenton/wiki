@@ -6,6 +6,7 @@ import {
   doc,
   DocumentReference,
   getDocs,
+  getDoc,
   onSnapshot,
   Query,
   query,
