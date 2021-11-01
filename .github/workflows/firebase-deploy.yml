@@ -6,17 +6,13 @@ jobs:
   deploy_firebase:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
       - name: setup
         run: |
@@ -25,9 +21,9 @@ jobs:
       - name: build-dev
         if: github.ref != 'refs/heads/prod'
         run: |
-          npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
+          cd firebase && npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_DEV_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
 
       - name: build-prod
         if: github.ref == 'refs/heads/prod'
         run: |
-          npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
+          cd firebase && npx firebase-tools deploy -P ${{ SECRETS.FIREBASE_PROD_ENV }} --token ${{ SECRETS.FIREBASE_CI_TOKEN }}
