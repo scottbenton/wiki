@@ -5,8 +5,6 @@ import {
   collection,
   doc,
   DocumentReference,
-  DocumentSnapshot,
-  getDoc,
   getDocs,
   onSnapshot,
   Query,
