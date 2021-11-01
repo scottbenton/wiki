@@ -6,10 +6,7 @@
     "-= DEV =-": "",
     "setup:dev": "npm --prefix ./functions/ i",
     "-= CI =-": "",
-    "setup:ci": "npm i && npm --prefix ./functions/ i",
+    "setup:ci": "npm --prefix ./functions/ i",
     "build:ci": "firebase deploy -P $FIREBASE_CI_ENV --token $FIREBASE_CI_TOKEN"
-  },
-  "dependencies": {
-    "firebase-tools": "^9.20.0"
   }
 }
