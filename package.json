@@ -1,6 +1,6 @@
 {
   "name": "willo-wiki",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Tree structure based note taking app",
   "scripts": {
     "-= DEV =-": "",
@@ -18,5 +18,6 @@
   "bugs": {
     "url": "https://github.com/scottbenton/wiki/issues"
   },
-  "homepage": "https://github.com/scottbenton/wiki#readme"
+  "homepage": "https://github.com/scottbenton/wiki#readme",
+  "dependencies": {}
 }

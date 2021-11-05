@@ -39,7 +39,7 @@ export const DesktopSidebar: React.FC<DesktopSidebarProps> = (props) => {
   return (
     <Resizable
       className={clsx(
-        "bg-gray-200 border-r-2 duration-150 transition-colors ease-in-out min-h-full resizable-desktop-sidebar",
+        "bg-gray-100 border-r-2 duration-150 transition-colors ease-in-out min-h-full resizable-desktop-sidebar",
         isResizeHovering ? "border-r-primary-500" : ""
       )}
       ref={resizeableRef}

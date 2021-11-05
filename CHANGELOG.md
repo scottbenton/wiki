@@ -1,10 +1,22 @@
 # Unreleased
 
+---
+
+# Version 1.2.0
+
+## Changed
+
+- Wiki pages can now be drag and dropped to reorder them (#42)
+
+---
+
 # Version 1.1.1
 
 ## Fixed
 
 - Fixed issue with wiki links not being saved / parsed properly (#68)
+
+---
 
 # Version 1.1.0
 
@@ -25,6 +37,8 @@
 ## Changed
 
 - Updated firebase to the latest version & extracted all logic out to domain folder
+
+---
 
 # Version 1.0.0
 

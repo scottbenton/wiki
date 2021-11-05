@@ -1,7 +1,7 @@
 import React from "react";
 import { useWikiPage } from "../../WikiPageProvider";
 import { SidebarItem } from "./SidebarItem";
-import { SidebarWikiPages } from "./SidebarWikiPages";
+import { SidebarWikiPages } from "./WikiPageItems";
 import { wikiPageConfig } from "../../WikiPageConfig";
 import OverviewIcon from "@heroicons/react/solid/SparklesIcon";
 import SettingsIcon from "@heroicons/react/solid/CogIcon";
