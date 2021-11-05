@@ -2,6 +2,7 @@ import {
   updateWikiAddChildPage,
   updateWikiRemoveChildPage,
   deleteWiki as delWiki,
+  watchWiki,
 } from "domain/Wiki";
 import {
   createWikiPage,
@@ -224,6 +225,93 @@ export const WikiPageProvider: React.FC = (props) => {
       }
     });
 
+  const moveWikiPage = (
+    pageId: string,
+    oldPosition: { oldParentId?: string; oldIndex?: number },
+    newPosition: { newParentId?: string; newIndex?: number }
+  ) => {
+    const { oldIndex = 0, oldParentId } = oldPosition;
+    const { newIndex = 0, newParentId } = newPosition;
+
+    const removeIndex = (pages: string[], idx: number): string[] => {
+      return pages.splice(idx, 1);
+    };
+    const addAtIndex = (pages: string[], idx: number, id: string): string[] => {
+      return pages.splice(idx, 0, id);
+    };
+
+    if (wikiPages.data && wikiPages.data[pageId] && currentWiki) {
+      if (oldParentId === newParentId) {
+        // We don't need to update the current page, just the parent page
+        if (oldParentId) {
+          const parentPage = { ...wikiPages.data[oldParentId] };
+
+          const childPages = [...parentPage.childPages];
+          removeIndex(childPages, oldIndex);
+          addAtIndex(childPages, newIndex, pageId);
+          parentPage.childPages = childPages;
+
+          updatePage(oldParentId, parentPage);
+        } else {
+          const updatedWiki = { ...currentWiki };
+
+          // 86aT9ShD2Vf296yq35ax, EEZyUZCKrZzVR2sMQUAx, XSN5q0xa62cBnPlcftoD, lwvutTh5aQYkuLB2YNa6, olg7XzEmgbnsZJDfINf1
+          const rootPages = [...updatedWiki.rootPages];
+          removeIndex(rootPages, oldIndex);
+          addAtIndex(rootPages, newIndex, pageId);
+          updatedWiki.rootPages = rootPages;
+
+          updateWiki(wikiId, updatedWiki);
+        }
+      }
+      // old and new parents are different
+      else {
+        // update the child
+        const childPage = { ...wikiPages.data[pageId] };
+        childPage.parentPage = newParentId;
+        updatePage(pageId, childPage);
+
+        // Remove from the old parent
+        if (oldParentId) {
+          const oldParentPage = { ...wikiPages.data[oldParentId] };
+
+          const childPages = [...oldParentPage.childPages];
+          removeIndex(childPages, oldIndex);
+          oldParentPage.childPages = childPages;
+
+          updatePage(oldParentId, oldParentPage);
+        } else {
+          const updatedWiki = { ...currentWiki };
+
+          const rootPages = [...updatedWiki.rootPages];
+          removeIndex(rootPages, oldIndex);
+          updatedWiki.rootPages = rootPages;
+
+          updateWiki(wikiId, updatedWiki);
+        }
+
+        // Add to the new parent
+        if (newParentId) {
+          const newParentPage = { ...wikiPages.data[newParentId] };
+
+          const childPages = [...newParentPage.childPages];
+          addAtIndex(childPages, newIndex, pageId);
+          newParentPage.childPages = childPages;
+
+          updatePage(newParentId, newParentPage);
+        } else {
+          const updatedWiki = { ...currentWiki };
+
+          const rootPages = [...updatedWiki.rootPages];
+          addAtIndex(rootPages, newIndex, pageId);
+          updatedWiki.rootPages = rootPages;
+
+          updateWiki(wikiId, updatedWiki);
+        }
+      }
+    }
+  };
+
   return (
     <WikiPageContext.Provider
       value={{
@@ -253,6 +341,7 @@ export const WikiPageProvider: React.FC = (props) => {
         deletePage,
 
         duplicatePage,
+        moveWikiPage,
       }}
     >
       {children}

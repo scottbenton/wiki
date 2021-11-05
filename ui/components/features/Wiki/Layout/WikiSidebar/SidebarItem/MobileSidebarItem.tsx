@@ -14,7 +14,6 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
     collapsed,
     handleCollapse,
     hasCollapseContent,
-    hoverAction,
     IconSlot,
   } = props;
 
@@ -34,8 +33,6 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
   const showCollapsableNoContentDot =
     typeof collapsed === "boolean" && !hasCollapseContent;
 
-  const { Icon: HoverIcon } = hoverAction || {};
-
   return (
     <div
       className={clsx(
@@ -51,6 +48,7 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
         <IconButton
           id={`collapse-${href}`}
           onClick={() => handleCollapse && handleCollapse()}
+          className={"h-full"}
           square
           small
           title={collapsed ? "Expand Sub-Pages" : "Collapse Sub-Pages"}
@@ -88,17 +86,6 @@ export const MobileSidebarItem: React.FC<SidebarItemProps> = (props) => {
           </span>
         </div>
       </Wrapper>
-      {hoverAction && HoverIcon && (
-        <IconButton
-          square
-          id={"hover-action"}
-          onClick={() => hoverAction.onClick()}
-          small
-          title={"Add Sub-Page"}
-        >
-          <HoverIcon className={"w-5 h-5 text-gray-500"} />
-        </IconButton>
-      )}
     </div>
   );
 };
