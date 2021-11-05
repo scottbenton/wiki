@@ -1,5 +1,9 @@
 # Unreleased
 
+---
+
+# Version 2.0.0
+
 ## Changed
 
 - Wiki pages can now be drag and dropped to reorder them (#42)
