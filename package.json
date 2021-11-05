@@ -18,5 +18,6 @@
   "bugs": {
     "url": "https://github.com/scottbenton/wiki/issues"
   },
-  "homepage": "https://github.com/scottbenton/wiki#readme"
+  "homepage": "https://github.com/scottbenton/wiki#readme",
+  "dependencies": {}
 }
